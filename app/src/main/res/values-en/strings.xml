@@ -15,6 +15,13 @@
     <string name="signIn_text">Sign in</string>
     <string name="btn_continue_without_account">Continue without account</string>
 
+    <string name="title_dialog_add_vehicle">Add a new vehicle</string>
+    <string name="btn_positive">Accept</string>
+    <string name="btn_negative">Cancel</string>
+
+
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 

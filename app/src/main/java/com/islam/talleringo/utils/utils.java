@@ -11,6 +11,7 @@ import com.islam.talleringo.activities.MainActivity;
 
 public class utils {
     public static final int GOOGLE_SIGN_IN_FLAG = 901;
+    public static final int CAMERA_REQUEST_CODE = 301;
 
     public static Intent  updateUI(FirebaseUser user, Context context){
         Intent intent;
