@@ -1,8 +1,10 @@
-package com.islam.talleringo;
+package com.islam.talleringo.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.islam.talleringo.R;
 
 public class MainActivity extends AppCompatActivity {
 
