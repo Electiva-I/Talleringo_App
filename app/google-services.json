@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "953170042479",
+    "project_id": "talleringo",
+    "storage_bucket": "talleringo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953170042479:android:1eac245998afc6fba6779a",
+        "android_client_info": {
+          "package_name": "com.islam.talleringo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "953170042479-j6o5pt963a6arqnp2hg5hup4g8ubpb2i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDo8ng4jG0QCWP4XXcLFhsLjFGQ8TUCoY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "953170042479-j6o5pt963a6arqnp2hg5hup4g8ubpb2i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
