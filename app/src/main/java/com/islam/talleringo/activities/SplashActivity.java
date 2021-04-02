@@ -21,6 +21,7 @@ public class SplashActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         startActivity(utils.updateUI(currentUser, getApplicationContext()));
+        finish();
     }
 
 

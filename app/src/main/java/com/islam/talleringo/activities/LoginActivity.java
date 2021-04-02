@@ -98,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             startActivity(utils.updateUI(user, getApplicationContext()));
                             Toast.makeText(getApplicationContext(),"INICIO CORRECTO", Toast.LENGTH_LONG).show();
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
