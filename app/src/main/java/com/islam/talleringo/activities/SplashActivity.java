@@ -23,7 +23,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        Log.d("TYPE",verifySessionType()+ "");
         if (verifySessionType() == 1) {
             startActivity(utils.updateUI(currentUser, getApplicationContext()));
         }   else if (verifySessionType() == 0){
