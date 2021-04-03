@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.facebook.login.LoginManager;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,7 +21,7 @@ import com.islam.talleringo.fragments.HomeFragment;
 import com.islam.talleringo.utils.utils;
 
 public class MainActivity extends AppCompatActivity {
-    private Button logout ;
+    private MenuItem prevMenuItem ;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     @Override
@@ -33,12 +34,18 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (prevMenuItem != null) {
+                    prevMenuItem.setChecked(false);
+                }
+                prevMenuItem = item;
                 boolean fragment_transaction = false;
                 Fragment fragment = null;
                 switch (item.getItemId()){
                     case R.id.menu_signOut:
                         utils.signOut();
+                        LoginManager.getInstance().logOut();
                         startActivity(utils.updateUI(null,getApplicationContext()));
+                        finish();
                         break;
                     case R.id.menu_about:
                         fragment = new AboutFragment();
@@ -51,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
                 if (fragment_transaction)   {
+
                     getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.frame_layout, fragment)

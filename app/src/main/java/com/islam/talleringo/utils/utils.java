@@ -15,10 +15,14 @@ public class utils {
     public static Intent  updateUI(FirebaseUser user, Context context){
         Intent intent;
         if (user != null){
-            intent = new Intent(context, MainActivity.class);
+            intent = goTo(context, MainActivity.class);
         }else {
-            intent = new Intent(context, LoginActivity.class);
+            intent = goTo(context, LoginActivity.class);
         }
+        return  intent;
+    }
+    public static Intent  goTo( Context context, Class to){
+        Intent intent = new Intent(context, to);
         return  intent;
     }
 
