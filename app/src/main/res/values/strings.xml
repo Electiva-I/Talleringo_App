@@ -5,6 +5,10 @@
     <string name="menu_sign_out">Cerrar Sesión</string>
     <string name="menu_about">Acerca de</string>
     <string name="menu_home">Inicio</string>
+    <string name="menu_vehicles">Vehiculos</string>
+    <string name="menu_maintenance">Mantenimientos</string>
+    <string name="menu_settings">Configuraciones</string>
+    <string name="menu_record">Historial</string>
 
     <string name="header_title">Talleringo App</string>
     <string name="header_text">Usuario</string>
@@ -21,12 +25,4 @@
 
     <string name="facebook_app_id">286245596344245</string>
     <string name="fb_login_protocol_scheme">fb286245596344245</string>
-
-
-    <string name="home_menu_cardview_text_1">Vehiculos</string>
-    <string name="home_menu_cardview_text_2">Mantenimientos</string>
-    <string name="home_menu_cardview_text_3">Configuraciones</string>
-    <string name="home_menu_cardview_text_4">Historial</string>
-
-
 </resources>

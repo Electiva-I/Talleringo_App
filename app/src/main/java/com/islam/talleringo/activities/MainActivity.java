@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.islam.talleringo.R;
 import com.islam.talleringo.fragments.AboutFragment;
 import com.islam.talleringo.fragments.HomeFragment;
+import com.islam.talleringo.fragments.VehicleFragment;
 import com.islam.talleringo.utils.utils;
 
 public class MainActivity extends AppCompatActivity {
@@ -55,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.menu_home:
                         fragment = new HomeFragment();
+                        fragment_transaction = true;
+                        break;
+                    case R.id.menu_vehicles:
+                        fragment = new VehicleFragment();
                         fragment_transaction = true;
                         break;
                 }

@@ -4,8 +4,8 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:fitsSystemWindows="true">
+
     <LinearLayout
         android:orientation="vertical"
 
@@ -55,7 +55,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/home_menu_cardview_text_1"
+                                android:text="@string/menu_vehicles"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"></TextView>
                         </LinearLayout>
@@ -83,7 +83,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/home_menu_cardview_text_2"
+                                android:text="@string/menu_maintenance"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"></TextView>
                         </LinearLayout>
@@ -117,7 +117,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/home_menu_cardview_text_3"
+                                android:text="@string/menu_settings"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"></TextView>
                         </LinearLayout>
@@ -145,7 +145,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/home_menu_cardview_text_4"
+                                android:text="@string/menu_record"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"></TextView>
                         </LinearLayout>
