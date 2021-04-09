@@ -23,4 +23,10 @@
     <string name="fb_login_protocol_scheme">fb286245596344245</string>
 
 
+    <string name="home_menu_cardview_text_1">Vehiculos</string>
+    <string name="home_menu_cardview_text_2">Mantenimientos</string>
+    <string name="home_menu_cardview_text_3">Configuraciones</string>
+    <string name="home_menu_cardview_text_4">Historial</string>
+
+
 </resources>

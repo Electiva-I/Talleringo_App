@@ -18,4 +18,11 @@
     <string name="facebook_app_id">286245596344245</string>
     <string name="fb_login_protocol_scheme">fb286245596344245</string>
 
+
+
+    <string name="home_menu_cardview_text_1">Vehicles</string>
+    <string name="home_menu_cardview_text_2">Maintenance</string>
+    <string name="home_menu_cardview_text_3">Settings</string>
+    <string name="home_menu_cardview_text_4">Record</string>
+
 </resources>
