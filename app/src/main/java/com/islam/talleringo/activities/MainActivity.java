@@ -18,6 +18,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.islam.talleringo.R;
 import com.islam.talleringo.fragments.AboutFragment;
 import com.islam.talleringo.fragments.HomeFragment;
+import com.islam.talleringo.fragments.MaintenanceFragment;
+import com.islam.talleringo.fragments.RecordFragment;
+import com.islam.talleringo.fragments.SettingsFragment;
 import com.islam.talleringo.fragments.VehicleFragment;
 import com.islam.talleringo.utils.utils;
 
@@ -53,13 +56,24 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new AboutFragment();
                         fragment_transaction = true;
                         break;
-
                     case R.id.menu_home:
                         fragment = new HomeFragment();
                         fragment_transaction = true;
                         break;
                     case R.id.menu_vehicles:
                         fragment = new VehicleFragment();
+                        fragment_transaction = true;
+                        break;
+                    case R.id.menu_maintenance:
+                        fragment = new MaintenanceFragment();
+                        fragment_transaction = true;
+                        break;
+                    case R.id.menu_settings:
+                        fragment = new SettingsFragment();
+                        fragment_transaction = true;
+                        break;
+                    case R.id.menu_record:
+                        fragment = new RecordFragment();
                         fragment_transaction = true;
                         break;
                 }
