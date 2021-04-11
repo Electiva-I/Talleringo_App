@@ -1,12 +1,19 @@
 package com.islam.talleringo.fragments;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.islam.talleringo.R;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -14,6 +21,7 @@ import androidx.fragment.app.Fragment;
  * Use the {@link VehicleFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class VehicleFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -24,6 +32,7 @@ public class VehicleFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private FloatingActionButton btn;
 
     public VehicleFragment() {
         // Required empty public constructor
@@ -60,6 +69,23 @@ public class VehicleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_vehicles, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_vehicles, container, false);
+
+        return view;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        btn = view.findViewById(R.id.fdadd);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Hola desde el fragment", Toast.LENGTH_SHORT).show();
+                //getFragmentManager().beginTransaction().add(R.id.frame_layout, new RecordFragment()).commit();
+            }
+        });
+    }
+
 }

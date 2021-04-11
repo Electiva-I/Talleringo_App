@@ -7,5 +7,18 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="@drawable/background_layout"
         tools:context=".fragments.RecordFragment">
-
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/menu_record"
+                android:textSize="24sp">
+            </TextView>
+        </LinearLayout>
     </FrameLayout>
