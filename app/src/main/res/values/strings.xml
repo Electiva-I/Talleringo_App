@@ -25,6 +25,12 @@
     <string name="add_vehicle_anio">Año:</string>
     <string name="add_vehicle_image">Imagen:</string>
 
+    <string name="title_add_maintenance">Agregar Mantenimiento</string>
+    <string name="add_maintenance_vehiculo">Vehiculo:</string>
+    <string name="add_maintenance_detalle">Detalle:</string>
+    <string name="add_maintenance_costo">Costo:</string>
+    <string name="add_maintenance_fechaprog">Fecha programada:</string>
+
     <string name="btn_add">Agregar</string>
     <string name="btn_cancel">Cancelar</string>
 

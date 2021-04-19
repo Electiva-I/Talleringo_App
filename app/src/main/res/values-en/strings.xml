@@ -24,6 +24,12 @@
     <string name="add_vehicle_anio">Year:</string>
     <string name="add_vehicle_image">Image:</string>
 
+    <string name="title_add_maintenance">Add Maintenance</string>
+    <string name="add_maintenance_vehiculo">Vehicle:</string>
+    <string name="add_maintenance_detalle">Detail:</string>
+    <string name="add_maintenance_costo">Cost:</string>
+    <string name="add_maintenance_fechaprog">Scheduled date:</string>
+
     <string name="btn_add">Add</string>
     <string name="btn_cancel">Cancel</string>
 

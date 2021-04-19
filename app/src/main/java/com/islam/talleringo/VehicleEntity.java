@@ -19,7 +19,7 @@ public class VehicleEntity {
     @SerializedName("img_url")
     @Expose
     private String imgUrl;
-    @SerializedName("a\u00f1o")
+    @SerializedName("AddMaintenanceDialog\u00f1o")
     @Expose
     private String aO;
     @SerializedName("estado")

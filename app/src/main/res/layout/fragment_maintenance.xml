@@ -7,18 +7,18 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="@drawable/background_layout"
         tools:context=".fragments.MaintenanceFragment">
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddMaintenance"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="@string/label_text_maintenance"
-                android:textSize="24sp">
-            </TextView>
-        </LinearLayout>
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="18dp"
+            android:src="@drawable/ic_add_fab" />
+    </RelativeLayout>
     </FrameLayout>

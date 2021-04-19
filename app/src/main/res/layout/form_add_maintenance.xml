@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_add_vehicle"
+        android:text="@string/title_add_maintenance"
         android:textColor="@color/white"
         android:textSize="24dp"
         android:gravity="center"
@@ -21,18 +21,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            "BRAND"
+            "VEHICLE"
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/add_vehicle_marca"
+                android:text="@string/add_maintenance_vehiculo"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:gravity="left"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"></TextView>
+            <Spinner
+                android:id="@+id/vehicle_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="@color/white"></Spinner>
+            "DETAIL"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_maintenance_detalle"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 android:gravity="left"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"></TextView>
             <EditText
-                android:id="@+id/brand_text"
+                android:id="@+id/detail_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -40,18 +58,19 @@
                 android:layout_marginRight="25dp"
                 android:background="@color/white"
                 android:padding="10dp"></EditText>
-            "MODEL"
+            "COST"
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/add_vehicle_modelo"
+                android:text="@string/add_maintenance_costo"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 android:gravity="left"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"></TextView>
+                android:layout_marginTop="15dp"
+                ></TextView>
             <EditText
-                android:id="@+id/model_text"
+                android:id="@+id/cost_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -59,44 +78,25 @@
                 android:layout_marginRight="25dp"
                 android:background="@color/white"
                 android:padding="10dp"></EditText>
-            "YEAR"
+            "DATE"
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/add_vehicle_anio"
+                android:text="@string/add_maintenance_fechaprog"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 android:gravity="left"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"></TextView>
-            <EditText
-                android:id="@+id/year_text"
+            <DatePicker
+                android:id="@+id/date_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:background="@color/white"
-                android:padding="10dp"></EditText>
-            "IMAGE"
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/add_vehicle_image"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                android:gravity="left"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"></TextView>
-
-            <ImageButton
-                android:id="@+id/image_src"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:gravity="left"
-                android:padding="80dp"></ImageButton>
+                android:padding="10dp"></DatePicker>
             "ACTIONS"
             <Button
                 android:id="@+id/btn_add_vehicle"

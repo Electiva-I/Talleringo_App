@@ -30,7 +30,7 @@ public class SettingsFragment extends Fragment {
     }
 
     /**
-     * Use this factory method to create a new instance of
+     * Use this factory method to create AddMaintenanceDialog new instance of
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.

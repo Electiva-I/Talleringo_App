@@ -17,8 +17,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,25 +36,34 @@ import com.bumptech.glide.Glide;
 
 import java.io.File;
 
-public class AddCarDialog extends DialogFragment {
-    //private ImageButton btnImg;
+public class AddMaintenanceDialog extends DialogFragment {
+
     private Button btn_add, btn_cancel;
+    private Spinner cboxVehicle;
+    private EditText vehicle, detalle, costo, fecha;
+
+    String[] Vehicles = {"Seleccione","Mazda RX","Toyota Tacoma","Nissan GTR"};
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.form_add_vehicle,container, true);
+        View view = inflater.inflate(R.layout.form_add_maintenance,container, true);
         //btnImg  = view.findViewById(R.id.btnImg);
         btn_add = view.findViewById(R.id.btn_add_vehicle);
         btn_cancel = view.findViewById(R.id.btn_cancel_vehicle);
+        cboxVehicle = view.findViewById(R.id.vehicle_text);
+        costo = view.findViewById(R.id.cost_text);
+        costo.setEnabled(false);
+        cboxVehicle.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Vehicles));
         return view;
     }
 
-   @NonNull
-   @Override
-   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-       Dialog dialog = super.onCreateDialog(savedInstanceState);
-       return dialog;
-   }
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        return dialog;
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -70,40 +82,5 @@ public class AddCarDialog extends DialogFragment {
             }
         });
     }
-
-   //@Override
-   //public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-   //    super.onActivityCreated(savedInstanceState);
-   //    btnImg.setOnClickListener(new View.OnClickListener() {
-   //        @Override
-   //        public void onClick(View v) {
-   //            Intent pictureIntent = new Intent("android.media.action.IMAGE_CAPTURE");
-
-
-   //            if (CheckPermission(Manifest.permission.CAMERA)){
-
-   //                startActivityForResult(pictureIntent, utils.CAMERA_REQUEST_CODE);
-   //            } else {
-   //                requestPermissions(new String[]{Manifest.permission.CAMERA}, utils.CAMERA_REQUEST_CODE);
-   //            }
-   //        }
-   //    });
-   //}
-
-   //private  boolean CheckPermission(String permission){
-   //    int result = getActivity().checkCallingOrSelfPermission(permission);
-   //    return  result == PackageManager.PERMISSION_GRANTED;
-   //}
-
-   //  @Override
-   //  public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-   //      switch (requestCode) {
-   //          case  utils.CAMERA_REQUEST_CODE:
-   //              String result = data.toUri(0);
-
-   //              break;
-   //      }
-   //  }
-
 
 }

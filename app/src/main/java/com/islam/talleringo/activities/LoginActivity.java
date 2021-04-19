@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                             writeSharedPreference(1);
                             finish();
                         } else {
-                            // If sign in fails, display a message to the user.
+                            // If sign in fails, display AddMaintenanceDialog message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             startActivity(utils.updateUI(null, getApplicationContext()));
                         }
@@ -171,7 +171,7 @@ public class LoginActivity extends AppCompatActivity {
                             writeSharedPreference(1);
                             finish();
                         } else {
-                            // If sign in fails, display a message to the user.
+                            // If sign in fails, display AddMaintenanceDialog message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(getApplicationContext(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
