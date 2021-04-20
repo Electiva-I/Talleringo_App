@@ -13,12 +13,107 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:text="@string/menu_settings"
-                android:textSize="24sp">
-            </TextView>
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:gravity="center"
+                android:layout_marginTop="15dp"></TextView>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    "SYNC UP"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_settings_sincronizar"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:gravity="left"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="15dp"></TextView>
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="25dp">
+                        <RadioButton
+                            android:id="@+id/rbtn_yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_settings_rbtn_yes"
+                            android:textColor="@color/white"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="50dp"
+                            android:buttonTint="@color/splash_background"
+                            android:textIsSelectable="true"/>
+                        <RadioButton
+                            android:id="@+id/rbtn_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_settings_rbtn_no"
+                            android:buttonTint="@color/splash_background"
+                            android:textColor="@color/white"/>
+                    </RadioGroup>
+                    "SYNCHRONIZATION TIME"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_settings_hora"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:gravity="left"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="15dp"></TextView>
+                        <TextView
+                            android:id="@+id/hora_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginRight="25dp"
+                            android:background="@color/white"
+                            android:hint="@string/hint_time"
+                            android:textStyle="bold"
+                            android:padding="5dp"
+                            android:drawableTop="@drawable/hour"
+                            android:inputType="time"/>
+                    "CHECK LEYEND"
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:paddingTop="6dp"
+                        android:gravity="left"
+                        android:textSize="16dp"
+                        android:layout_marginLeft="25dp"
+                        android:buttonTint="@color/splash_background"
+                        android:layout_marginRight="25dp"
+                        android:text="@string/add_settings_cheboxLeyend"
+                        android:textColor="@color/white"/>
+                    "ACTIONS"
+                    <Button
+                        android:id="@+id/btn_save"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:gravity="left"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="15dp"
+                        android:padding="10dp"
+                        android:text="@string/btn_save"
+                        android:textAlignment="center"
+                        android:backgroundTint="@color/gray_ligth"></Button>
+
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
     </FrameLayout>

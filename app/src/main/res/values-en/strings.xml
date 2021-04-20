@@ -30,8 +30,16 @@
     <string name="add_maintenance_costo">Cost:</string>
     <string name="add_maintenance_fechaprog">Scheduled date:</string>
 
+    <string name="add_settings_sincronizar">Sync up:</string>
+    <string name="add_settings_hora">Synchronization time:</string>
+    <string name="add_settings_cheboxLeyend">You want to receive notifications from the application.</string>
+    <string name="add_settings_rbtn_yes">YES</string>
+    <string name="add_settings_rbtn_no">NO</string>
+    <string name="hint_time">Select time</string>
+
     <string name="btn_add">Add</string>
     <string name="btn_cancel">Cancel</string>
+    <string name="btn_save">Save</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="preference_file_key">com.islam.talleringo.PREFERENCE_FILE_KEY</string>
