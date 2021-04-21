@@ -29,6 +29,7 @@
     <string name="add_maintenance_detalle">Detail:</string>
     <string name="add_maintenance_costo">Cost:</string>
     <string name="add_maintenance_fechaprog">Scheduled date:</string>
+    <string name="hint_date">Select the date</string>
 
     <string name="add_settings_sincronizar">Sync up:</string>
     <string name="add_settings_hora">Synchronization time:</string>

@@ -30,6 +30,7 @@
     <string name="add_maintenance_detalle">Detalle:</string>
     <string name="add_maintenance_costo">Costo:</string>
     <string name="add_maintenance_fechaprog">Fecha programada:</string>
+    <string name="hint_date">Seleccione la fecha</string>
 
     <string name="add_settings_sincronizar">Sincronizar:</string>
     <string name="add_settings_hora">Hora de sincronizacion:</string>
