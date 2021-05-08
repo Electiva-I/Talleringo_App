@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -17,7 +18,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -25,25 +29,50 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Room;
 
 import com.islam.talleringo.R;
 import com.islam.talleringo.activities.MainActivity;
+import com.islam.talleringo.database.AppDatabase;
+import com.islam.talleringo.database.LiveData.DataViewModel;
+import com.islam.talleringo.database.Vehicles.Vehicle;
+import com.islam.talleringo.utils.App;
 import com.islam.talleringo.utils.utils;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddCarDialog extends DialogFragment {
     //private ImageButton btnImg;
     private Button btn_add, btn_cancel;
+    private AutoCompleteTextView brand, model;
+    private  EditText year;
+    private DataViewModel dataViewModel;
+
+    public  AddCarDialog(DataViewModel dataViewModel){
+        this.dataViewModel = dataViewModel;
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.form_add_vehicle,container, true);
-        //btnImg  = view.findViewById(R.id.btnImg);
+        initDialog(view);
+        return view;
+    }
+
+    private void initDialog(View view){
         btn_add = view.findViewById(R.id.btn_add_vehicle);
         btn_cancel = view.findViewById(R.id.btn_cancel_vehicle);
-        return view;
+        brand = view.findViewById(R.id.brand_text);
+        model = view.findViewById(R.id.model_text);
+        year = view.findViewById(R.id.year_text);
+
+        String [] vehicles_array = getResources().getStringArray(R.array.vehicles_array);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, vehicles_array);
+        brand.setAdapter(adapter);
     }
 
    @NonNull
@@ -59,51 +88,23 @@ public class AddCarDialog extends DialogFragment {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Agregado", Toast.LENGTH_SHORT).show();
+                addVehicle(model.getText().toString(), brand.getText().toString(), year.getText().toString());
+                getDialog().dismiss();
             }
         });
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getDialog().cancel();
-                Toast.makeText(getContext(), "Cancelado", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-   //@Override
-   //public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-   //    super.onActivityCreated(savedInstanceState);
-   //    btnImg.setOnClickListener(new View.OnClickListener() {
-   //        @Override
-   //        public void onClick(View v) {
-   //            Intent pictureIntent = new Intent("android.media.action.IMAGE_CAPTURE");
-
-
-   //            if (CheckPermission(Manifest.permission.CAMERA)){
-
-   //                startActivityForResult(pictureIntent, utils.CAMERA_REQUEST_CODE);
-   //            } else {
-   //                requestPermissions(new String[]{Manifest.permission.CAMERA}, utils.CAMERA_REQUEST_CODE);
-   //            }
-   //        }
-   //    });
-   //}
-
-   //private  boolean CheckPermission(String permission){
-   //    int result = getActivity().checkCallingOrSelfPermission(permission);
-   //    return  result == PackageManager.PERMISSION_GRANTED;
-   //}
-
-   //  @Override
-   //  public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-   //      switch (requestCode) {
-   //          case  utils.CAMERA_REQUEST_CODE:
-   //              String result = data.toUri(0);
-
-   //              break;
-   //      }
-   //  }
-
-
+    private void addVehicle(String model, String brand, String year){
+        Vehicle vehicle =  new Vehicle(model, brand, year);
+        AppDatabase db = Room.databaseBuilder(App.getContext(),
+                AppDatabase.class, "vehicle").allowMainThreadQueries().build();
+        db.vehicleDAO().insertAll(vehicle);
+        dataViewModel.getNewVehicle().setValue(vehicle);
+    }
 }

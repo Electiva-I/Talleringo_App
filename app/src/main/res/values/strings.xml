@@ -10,6 +10,9 @@
     <string name="menu_settings">Configuraciones</string>
     <string name="menu_record">Historial</string>
 
+    <string name="menu_delete">Eliminar</string>
+    <string name="menu_update">Actualizar</string>
+
     <string name="header_title">Talleringo App</string>
     <string name="header_text">Usuario</string>
 
@@ -42,6 +45,28 @@
     <string name="btn_add">Agregar</string>
     <string name="btn_cancel">Cancelar</string>
     <string name="btn_save">Guardar</string>
+
+    <string name="txt_vehicle_name">Tsuru</string>
+    <string name="txt_vehicle_brand">Nissan</string>
+    <string name="txt_vehicle_year">20/50/5055</string>
+
+
+    <string-array name="vehicles_array">
+        <item>Nissan</item>
+        <item>Kia</item>
+        <item>Toyota</item>
+        <item>BMW</item>
+        <item>Chevrolet</item>
+        <item>Audi</item>
+        <item>Ford</item>
+        <item>Ferrari</item>
+        <item>Seat</item>
+    </string-array>
+
+    <string name="txt_dialog_delete">Ten en cuenta que si eliminas un vehiculo tambien eliminaras los dato que dependan de el</string>
+    <string name = "txt_dialog_warning">Advertencia</string>
+
+    <string name = "txt_card_maintenance_detail">Hola mundo  otra cosa Hola mundo  otra cosa Hola mundo  otra cosa Hola mundo  otra cosa</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="preference_file_key">com.islam.talleringo.PREFERENCE_FILE_KEY</string>

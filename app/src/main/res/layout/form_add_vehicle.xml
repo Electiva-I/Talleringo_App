@@ -4,6 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:minWidth="400dp"
+    android:paddingBottom="15dp"
     android:background="@color/gray_dark">
     <TextView
         android:layout_width="match_parent"
@@ -21,7 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            "BRAND"
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -31,7 +31,8 @@
                 android:gravity="left"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"></TextView>
-            <EditText
+
+            <AutoCompleteTextView
                 android:id="@+id/brand_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,8 +40,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:background="@color/white"
-                android:padding="10dp"></EditText>
-            "MODEL"
+                android:padding="10dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,8 +49,8 @@
                 android:textSize="18dp"
                 android:gravity="left"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"></TextView>
-            <EditText
+                android:layout_marginTop="15dp"/>
+            <AutoCompleteTextView
                 android:id="@+id/model_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,8 +58,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:background="@color/white"
-                android:padding="10dp"></EditText>
-            "YEAR"
+                android:padding="10dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,28 +75,10 @@
                 android:gravity="left"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
+                android:inputType="number"
                 android:background="@color/white"
                 android:padding="10dp"></EditText>
-            "IMAGE"
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/add_vehicle_image"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                android:gravity="left"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"></TextView>
 
-            <ImageButton
-                android:id="@+id/image_src"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:gravity="left"
-                android:padding="80dp"></ImageButton>
-            "ACTIONS"
             <Button
                 android:id="@+id/btn_add_vehicle"
                 android:layout_width="match_parent"
@@ -128,4 +109,5 @@
                 android:backgroundTint="@color/white"></Button>
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

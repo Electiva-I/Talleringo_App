@@ -1,3 +1,4 @@
+
 package com.islam.talleringo.dialogs;
 
 import android.Manifest;
@@ -20,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -33,40 +35,60 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
+import androidx.room.Room;
 
 import com.islam.talleringo.R;
 import com.islam.talleringo.activities.MainActivity;
+import com.islam.talleringo.database.AppDatabase;
+import com.islam.talleringo.database.LiveData.DataViewModel;
+import com.islam.talleringo.database.Maintenances.Maintenance;
+import com.islam.talleringo.database.Vehicles.Vehicle;
+import com.islam.talleringo.utils.App;
 import com.islam.talleringo.utils.utils;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.Date;
 
 public class AddMaintenanceDialog extends DialogFragment {
 
     private Button btn_add, btn_cancel;
     private Spinner cboxVehicle;
-    private EditText vehicle, detalle, costo;
+    private EditText vehicle, detalle;
     private TextView fecha;
-    int year, month, day;
+    private int year, month, day;
+    private DataViewModel dataViewModel;
+    AppDatabase db = Room.databaseBuilder(App.getContext(),
+            AppDatabase.class, "vehicle").allowMainThreadQueries().build();
+
     DatePickerDialog.OnDateSetListener setListener;
 
-    String[] Vehicles = {"Seleccione","Mazda RX","Toyota Tacoma","Nissan GTR"};
+
+    public AddMaintenanceDialog(DataViewModel dataViewModel){
+        this.dataViewModel = dataViewModel;
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.form_add_maintenance,container, true);
-        //btnImg  = view.findViewById(R.id.btnImg);
+        initDialog(view);
+        return view;
+    }
+    private void initDialog(View view){
         btn_add = view.findViewById(R.id.btn_add_vehicle);
         btn_cancel = view.findViewById(R.id.btn_cancel_vehicle);
         cboxVehicle = view.findViewById(R.id.vehicle_text);
-        costo = view.findViewById(R.id.cost_text);
-        costo.setEnabled(false);
+        detalle = view.findViewById(R.id.detail_text);
         fecha = view.findViewById(R.id.date_text);
-        cboxVehicle.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Vehicles));
+        ArrayAdapter<Vehicle> adapter = new ArrayAdapter<Vehicle>(getContext(),
+                R.layout.spinner_item, db.vehicleDAO().getAll());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        cboxVehicle.setAdapter(adapter);
         CallDateDialog();
-        return view;
+
     }
 
     public void CallDateDialog(){
@@ -113,14 +135,21 @@ public class AddMaintenanceDialog extends DialogFragment {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Agregado", Toast.LENGTH_SHORT).show();
+                Vehicle vehicle = (Vehicle) cboxVehicle.getSelectedItem();
+                String detail = detalle.getText().toString();
+                String creation_date = new Date().toString();
+                String schedule_date = fecha.getText().toString();
+
+                Maintenance maintenance = new Maintenance(vehicle.ID, detail, creation_date, schedule_date );
+                db.maintenanceDAO().insertAll(maintenance);
+                dataViewModel.getNewMaintenance().setValue(maintenance);
+                getDialog().dismiss();
             }
         });
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getDialog().cancel();
-                Toast.makeText(getContext(), "Cancelado", Toast.LENGTH_SHORT).show();
             }
         });
     }
