@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
                 if (fragment_transaction)   {
-
                     getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.frame_layout, fragment)

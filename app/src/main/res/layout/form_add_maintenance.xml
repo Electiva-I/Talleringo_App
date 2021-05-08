@@ -4,6 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:minWidth="400dp"
+    android:paddingBottom="15dp"
     android:background="@color/gray_dark">
     <TextView
         android:layout_width="match_parent"
@@ -38,7 +39,7 @@
                 android:gravity="left"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:background="@color/white"></Spinner>
+                android:background="@color/white"/>
             "DETAIL"
             <TextView
                 android:layout_width="match_parent"
@@ -54,30 +55,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
+                android:lines="2"
+                android:inputType="textMultiLine"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:background="@color/white"
                 android:padding="10dp"></EditText>
-            "COST"
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/add_maintenance_costo"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                android:gravity="left"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                ></TextView>
-            <EditText
-                android:id="@+id/cost_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:background="@color/white"
-                android:padding="10dp"></EditText>
+
             "DATE"
             <TextView
                 android:layout_width="match_parent"
