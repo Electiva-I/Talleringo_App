@@ -24,14 +24,14 @@
             app:layout_constraintBottom_toTopOf="@+id/txt_vehicle_year"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/maintenance" />
+            app:srcCompat="@drawable/record" />
 
         <TextView
             android:id="@+id/txt_about_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:text="@string/txt_vehicle_brand"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -44,8 +44,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
             android:ellipsize="end"
             android:lines="3"
             android:maxEms="8"
@@ -83,6 +83,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_pop_menu" />
+
+        <TextView
+            android:id="@+id/txt_record_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/white"
+            android:text="@string/txt_record_cost"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

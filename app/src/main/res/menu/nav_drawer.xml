@@ -5,43 +5,52 @@
 
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/menu_home"
-            android:title="@string/menu_home"
-            android:icon="@drawable/home"
-            />
-        <item
-            android:id="@+id/menu_vehicles"
-            android:title="@string/menu_vehicles"
-            android:icon="@drawable/vehicles"
-            />
-        <item
-            android:id="@+id/menu_maintenance"
-            android:title="@string/menu_maintenance"
-            android:icon="@drawable/maintenance"
-            />
-        <item
-            android:id="@+id/menu_settings"
-            android:title="@string/menu_settings"
-            android:icon="@drawable/settings"
-            />
-        <item
-            android:id="@+id/menu_record"
-            android:title="@string/menu_record"
-            android:icon="@drawable/record"
-            />
-        <item
-            android:id="@+id/menu_about"
-            android:title="@string/menu_about"
-            android:icon="@drawable/about"
-            />
-    </group>
 
-    <group android:checkableBehavior="single" >
-        <item
-            android:id="@+id/menu_signOut"
-            android:title="@string/menu_sign_out"
-            android:icon="@drawable/logout"
-            ></item>
+
+            <group android:checkableBehavior="single">
+                <item
+                    android:checked="true"
+                    android:id="@+id/menu_home"
+                    android:title="@string/menu_home"
+                    android:icon="@drawable/home"
+                    />
+                <item
+                    android:id="@+id/menu_vehicles"
+                    android:title="@string/menu_vehicles"
+                    android:icon="@drawable/vehicles"
+                    />
+                <item
+                    android:id="@+id/menu_maintenance"
+                    android:title="@string/menu_maintenance"
+                    android:icon="@drawable/maintenance"
+                    />
+
+                <item
+                    android:id="@+id/menu_record"
+                    android:title="@string/menu_record"
+                    android:icon="@drawable/record"
+                    />
+            </group>
+
+
+
+
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/menu_settings"
+                        android:title="@string/menu_settings"
+                        android:icon="@drawable/settings"
+                        />
+                    <item
+                        android:id="@+id/menu_about"
+                        android:title="@string/menu_about"
+                        android:icon="@drawable/about"
+                        />
+                    <item
+                        android:id="@+id/menu_signOut"
+                        android:title="@string/menu_sign_out"
+                        android:icon="@drawable/logout"
+                        />
+                </group>
     </group>
 </menu>

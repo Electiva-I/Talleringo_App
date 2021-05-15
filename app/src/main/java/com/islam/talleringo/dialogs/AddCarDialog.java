@@ -50,7 +50,7 @@ public class AddCarDialog extends DialogFragment {
     private Button btn_add, btn_cancel;
     private AutoCompleteTextView brand, model;
     private  EditText year;
-    private DataViewModel dataViewModel;
+    private final DataViewModel dataViewModel;
 
     public  AddCarDialog(DataViewModel dataViewModel){
         this.dataViewModel = dataViewModel;
