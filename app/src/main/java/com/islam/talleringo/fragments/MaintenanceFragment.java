@@ -1,7 +1,5 @@
 package com.islam.talleringo.fragments;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +20,6 @@ import com.islam.talleringo.utils.App;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -68,10 +65,7 @@ public class MaintenanceFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (db.vehicleDAO().countVehicles() != 0){
-            initFragment();
-        }
-
+        initFragment();
     }
 
     @Override
@@ -107,37 +101,10 @@ public class MaintenanceFragment extends Fragment {
         }, new Maintenance_Adapter.OnMenuItemClickListener() {
             @Override
             public void OnMenuItemClick(int id, int position, ImageButton button) {
-                PopupMenu popup = new PopupMenu(getContext(), button);
-                popup.getMenuInflater().inflate(R.menu.vehicle_menu, popup.getMenu());
-                popup.setOnMenuItemClickListener(item -> {
-                    switch (item.getItemId()){
-                        case R.id.vehicle_menu_delete:
-                            deleteMaintenance(id, position, db);
-                            break;
-                    }
-                    return false;
-                });
-                popup.show();
+
             }
         });
         maintenanceRV.setAdapter(maintenanceAdapter);
-    }
 
-    private void deleteMaintenance(int id, int position, AppDatabase db){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.txt_dialog_delete).setPositiveButton(R.string.menu_delete, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                int[] ids = {id};
-                db.maintenanceDAO().deleteId(ids);
-                maintenanceList.remove(position);
-                maintenanceAdapter.notifyItemRemoved(position);
-            }
-        }).setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        }).setTitle(R.string.txt_dialog_warning).show();
     }
 }
