@@ -25,7 +25,7 @@
         android:layout_marginStart="177dp"
         android:layout_marginEnd="159dp"
         android:layout_marginBottom="8dp"
-        android:text="Trust Technology"
+        android:text="@string/app_group"
         android:textStyle="bold"
         android:textColor="@color/splash_text"
         android:textSize="20sp"

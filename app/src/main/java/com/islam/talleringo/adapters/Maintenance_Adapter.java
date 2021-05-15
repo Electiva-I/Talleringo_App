@@ -18,10 +18,10 @@ import com.islam.talleringo.utils.App;
 import java.util.List;
 
 public class Maintenance_Adapter  extends RecyclerView.Adapter<Maintenance_Adapter.ViewHolder> {
-    private int render_layout;
-    private List<Maintenance> maintenances;
-    private OnItemClickListener itemClickListener;
-    private OnMenuItemClickListener menuItemClickListener;
+    private final int render_layout;
+    private final List<Maintenance> maintenances;
+    private final OnItemClickListener itemClickListener;
+    private final OnMenuItemClickListener menuItemClickListener;
     AppDatabase db = Room.databaseBuilder(App.getContext(),
             AppDatabase.class, "vehicle").allowMainThreadQueries().build();
 
@@ -59,11 +59,13 @@ public class Maintenance_Adapter  extends RecyclerView.Adapter<Maintenance_Adapt
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtModel, txtDate, txtDetail;
-        private ImageButton btnMenu;
+        private final TextView txtModel;
+        private final TextView txtDate;
+        private final TextView txtDetail;
+        private final ImageButton btnMenu;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.txtModel = itemView.findViewById(R.id.txt_maintenance_model);
+            this.txtModel = itemView.findViewById(R.id.txt_about_name);
             this.txtDate = itemView.findViewById(R.id.txt_maintenance_date);
             this.txtDetail = itemView.findViewById(R.id.txt_maintenance_detail);
             this.btnMenu = itemView.findViewById(R.id.btn_maintenance_menu);

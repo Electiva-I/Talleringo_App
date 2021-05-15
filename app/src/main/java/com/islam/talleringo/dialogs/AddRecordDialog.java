@@ -42,6 +42,7 @@ import com.islam.talleringo.activities.MainActivity;
 import com.islam.talleringo.database.AppDatabase;
 import com.islam.talleringo.database.LiveData.DataViewModel;
 import com.islam.talleringo.database.Maintenances.Maintenance;
+import com.islam.talleringo.database.Record.Record;
 import com.islam.talleringo.database.Vehicles.Vehicle;
 import com.islam.talleringo.utils.App;
 import com.islam.talleringo.utils.utils;
@@ -51,12 +52,12 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AddMaintenanceDialog extends DialogFragment {
+public class AddRecordDialog extends DialogFragment {
 
     private Button btn_add, btn_cancel;
-    private Spinner cboxVehicle;
-    private EditText vehicle, detalle;
-    private TextView fecha;
+    private Spinner spinnerVehicle;
+    private EditText  txtDetail, txtCost;
+    private TextView txtDate;
     private int year, month, day;
     private final DataViewModel dataViewModel;
     AppDatabase db = Room.databaseBuilder(App.getContext(),
@@ -65,47 +66,48 @@ public class AddMaintenanceDialog extends DialogFragment {
     DatePickerDialog.OnDateSetListener setListener;
 
 
-    public AddMaintenanceDialog(DataViewModel dataViewModel){
+    public AddRecordDialog(DataViewModel dataViewModel){
         this.dataViewModel = dataViewModel;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.form_add_maintenance,container, true);
+        View view = inflater.inflate(R.layout.form_add_record,container, true);
         initDialog(view);
         return view;
     }
     private void initDialog(View view){
         btn_add = view.findViewById(R.id.btn_add_vehicle);
         btn_cancel = view.findViewById(R.id.btn_cancel_vehicle);
-        cboxVehicle = view.findViewById(R.id.vehicle_text);
-        detalle = view.findViewById(R.id.detail_text);
-        fecha = view.findViewById(R.id.date_text);
+        spinnerVehicle = view.findViewById(R.id.vehicle_text);
+        txtDetail = view.findViewById(R.id.detail_text);
+        txtDate = view.findViewById(R.id.date_text);
+        txtCost = view.findViewById(R.id.cost_text);
         ArrayAdapter<Vehicle> adapter = new ArrayAdapter<Vehicle>(getContext(),
                 R.layout.spinner_item, db.vehicleDAO().getAll());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        cboxVehicle.setAdapter(adapter);
+        spinnerVehicle.setAdapter(adapter);
         CallDateDialog();
 
     }
 
     public void CallDateDialog(){
         Calendar calendar = Calendar.getInstance();
-         year = calendar.get(Calendar.YEAR);
-         month = calendar.get(Calendar.MONTH);
-         day = calendar.get(Calendar.DAY_OF_MONTH);
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
 
         setListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int y, int m, int d) {
                 month = m+1;
                 String date = day+"/"+month+"/"+year;
-                fecha.setText(date);
+                txtDate.setText(date);
             }
         };
-        fecha.setOnClickListener(new View.OnClickListener() {
+        txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -135,14 +137,14 @@ public class AddMaintenanceDialog extends DialogFragment {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Vehicle vehicle = (Vehicle) cboxVehicle.getSelectedItem();
-                String detail = detalle.getText().toString();
-                String creation_date = new Date().toString();
-                String schedule_date = fecha.getText().toString();
+                Vehicle vehicle = (Vehicle) spinnerVehicle.getSelectedItem();
+                String detail = txtDetail.getText().toString();
+                String creation_date = txtDate.getText().toString();
+                float  cost = Float.parseFloat(txtCost.getText().toString());
 
-                Maintenance maintenance = new Maintenance(vehicle.ID, detail, creation_date, schedule_date );
-                db.maintenanceDAO().insertAll(maintenance);
-                dataViewModel.getNewMaintenance().setValue(maintenance);
+                Record record = new Record(vehicle.ID, detail, creation_date, cost );
+                db.recordDAO().insertAll(record);
+                dataViewModel.getNewRecord().setValue(record);
                 getDialog().dismiss();
             }
         });

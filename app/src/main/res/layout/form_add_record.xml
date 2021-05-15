@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
@@ -9,9 +10,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_add_maintenance"
+        android:text="@string/title_add_record"
         android:textColor="@color/white"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:gravity="center"
         android:layout_marginTop="15dp"/>
     
@@ -28,9 +29,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/add_maintenance_vehiculo"
                 android:textColor="@color/white"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:gravity="left"
-                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="15dp"/>
             <Spinner
                 android:id="@+id/vehicle_text"
@@ -46,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/add_maintenance_detalle"
                 android:textColor="@color/white"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:gravity="left"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"/>
@@ -61,15 +62,35 @@
                 android:layout_marginRight="25dp"
                 android:background="@color/white"
                 android:padding="10dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_maintenance_cost"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:gravity="left"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"/>
+            <EditText
+                android:id="@+id/cost_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:lines="2"
+                android:inputType="numberDecimal"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="@color/white"
+                android:padding="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/add_maintenance_fechaprog"
+                android:text="@string/add_record_date_completed"
                 android:textColor="@color/white"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:gravity="left"
-                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="15dp"/>
             <TextView
                 android:id="@+id/date_text"
@@ -82,15 +103,15 @@
                 android:hint="@string/hint_date"
                 android:textStyle="bold"
                 android:padding="5dp"
-                android:drawableTop="@drawable/calendar"
-                android:inputType="date"/>
+                android:inputType="date"
+                app:drawableTopCompat="@drawable/calendar" />
 
             <Button
                 android:id="@+id/btn_add_vehicle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:gravity="left"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
@@ -104,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:gravity="left"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"

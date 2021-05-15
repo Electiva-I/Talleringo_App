@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
 
-    private int RC_SIGN_IN = utils.GOOGLE_SIGN_IN_FLAG;
-    private  String TAG = "SIGN_IN";
+    private final int RC_SIGN_IN = utils.GOOGLE_SIGN_IN_FLAG;
+    private final String TAG = "SIGN_IN";
     private CallbackManager mCallbackManager;
 
     @Override
@@ -199,7 +199,6 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("type", type);
         editor.commit();
-
     }
 
 

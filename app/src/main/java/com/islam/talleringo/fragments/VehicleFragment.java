@@ -3,19 +3,14 @@ package com.islam.talleringo.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.islam.talleringo.R;
 import com.islam.talleringo.activities.MainActivity;
 import com.islam.talleringo.adapters.Vehicles_Adapter;
@@ -23,7 +18,6 @@ import com.islam.talleringo.database.AppDatabase;
 import com.islam.talleringo.database.LiveData.DataViewModel;
 import com.islam.talleringo.database.Vehicles.Vehicle;
 import com.islam.talleringo.dialogs.AddCarDialog;
-import com.islam.talleringo.models.VehiclesModels;
 import com.islam.talleringo.utils.App;
 
 import androidx.annotation.NonNull;
@@ -36,7 +30,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleFragment extends Fragment {
@@ -48,7 +41,6 @@ public class VehicleFragment extends Fragment {
     private Vehicles_Adapter vehiclesAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private  List<Vehicle> vehiclesList;
-
     public VehicleFragment() {
         // Required empty public constructor
     }
@@ -133,11 +125,14 @@ public class VehicleFragment extends Fragment {
 
     private void deleteVehicle(int id, int position, AppDatabase db){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.txt_dialog_delete).setPositiveButton(R.string.menu_delete, new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.txt_dialog_delete)
+                .setPositiveButton(R.string.menu_delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 int[] ids = {id};
                 db.vehicleDAO().deleteId(ids);
+                db.maintenanceDAO().deleteIdByVehicle(ids);
+                db.recordDAO().deleteIdByVehicle(ids);
                 vehiclesList.remove(position);
                 vehiclesAdapter.notifyItemRemoved(position);
             }
@@ -147,7 +142,5 @@ public class VehicleFragment extends Fragment {
                 dialog.cancel();
             }
         }).setTitle(R.string.txt_dialog_warning).show();
-
-
     }
 }

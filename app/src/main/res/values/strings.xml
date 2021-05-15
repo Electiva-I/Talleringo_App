@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Talleringo</string>
 
-
+    <string name="app_group">Trust Technology</string>
     <string name="menu_sign_out">Cerrar Sesión</string>
     <string name="menu_about">Acerca de</string>
     <string name="menu_home">Inicio</string>
@@ -26,13 +26,17 @@
     <string name="add_vehicle_marca">Marca:</string>
     <string name="add_vehicle_modelo">Modelo:</string>
     <string name="add_vehicle_anio">Año:</string>
-    <string name="add_vehicle_image">Imagen:</string>
+    <string name="add_vehicle_image">Imagen:</string>s
 
     <string name="title_add_maintenance">Agregar Mantenimiento</string>
     <string name="add_maintenance_vehiculo">Vehiculo:</string>
     <string name="add_maintenance_detalle">Detalle:</string>
-    <string name="add_maintenance_costo">Costo:</string>
+    <string name="add_maintenance_cost">Costo:</string>
     <string name="add_maintenance_fechaprog">Fecha programada:</string>
+
+    <string name="title_add_record">Agregar Historial</string>
+    <string name="add_record_date_completed">Fecha:</string>
+
     <string name="hint_date">Seleccione la fecha</string>
 
     <string name="add_settings_sincronizar">Sincronizar:</string>
@@ -49,6 +53,13 @@
     <string name="txt_vehicle_name">Tsuru</string>
     <string name="txt_vehicle_brand">Nissan</string>
     <string name="txt_vehicle_year">20/50/5055</string>
+
+    <string name="txt_about_developed">Desarrollado por:</string>
+
+    <string name="txt_record_cost">$33.50</string>
+    <string name="txt_dollar_char">$</string>
+
+
 
 
     <string-array name="vehicles_array">

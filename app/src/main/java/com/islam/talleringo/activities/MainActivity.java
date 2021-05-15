@@ -6,8 +6,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
@@ -16,6 +21,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.islam.talleringo.R;
+import com.islam.talleringo.database.LiveData.DataViewModel;
+import com.islam.talleringo.database.Vehicles.Vehicle;
 import com.islam.talleringo.fragments.AboutFragment;
 import com.islam.talleringo.fragments.HomeFragment;
 import com.islam.talleringo.fragments.MaintenanceFragment;
@@ -35,15 +42,32 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setItemIconTintList(null);
+        Fragment fragment = new HomeFragment();
 
+        DataViewModel dataViewModel = new ViewModelProvider(this).get(DataViewModel.class);
+        final Observer<Vehicle> namObserver = new Observer<Vehicle>() {
+            @Override
+            public void onChanged(Vehicle vehicle) {
+                navigationView.getMenu().getItem(2).setEnabled(true);
+            }
+        };
+        dataViewModel.getNewVehicle().observe(this, namObserver);
 
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_layout, fragment)
+                .commit();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (prevMenuItem != null) {
                     prevMenuItem.setChecked(false);
+                }else {
+                    navigationView.getMenu().getItem(0).setChecked(false);
+
                 }
+
                 prevMenuItem = item;
                 boolean fragment_transaction = false;
                 Fragment fragment = null;
@@ -51,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_signOut:
                         utils.signOut();
                         LoginManager.getInstance().logOut();
+                        writeSharedPreference(-1);
                         startActivity(utils.updateUI(null,getApplicationContext()));
                         finish();
                         break;
@@ -102,6 +127,13 @@ public class MainActivity extends AppCompatActivity {
         });*/
 
 
+    }
+
+    private void writeSharedPreference(int type) {
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("type", type);
+        editor.commit();
     }
     private void  setToolbar() {
         Toolbar toolbar =  findViewById(R.id.toolbar);
