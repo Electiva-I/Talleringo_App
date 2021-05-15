@@ -11,8 +11,6 @@ import java.util.List;
 
 @Dao
 public interface MaintenanceDAO {
-        @Query("Select count(*) from maintenance")
-        int countMaintenance();
 
         @Query("Select * from maintenance")
         List<Maintenance> getAll();
@@ -22,9 +20,6 @@ public interface MaintenanceDAO {
 
         @Query("delete from maintenance where id in (:id)")
         void deleteId(int[] id);
-
-        @Query("delete from maintenance where maintenance_vehicle_id in (:id)")
-        void deleteIdByVehicle(int[] id);
 
         @Insert
         void insertAll(Maintenance... maintenance);

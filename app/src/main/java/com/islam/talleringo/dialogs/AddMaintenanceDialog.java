@@ -58,7 +58,7 @@ public class AddMaintenanceDialog extends DialogFragment {
     private EditText vehicle, detalle;
     private TextView fecha;
     private int year, month, day;
-    private final DataViewModel dataViewModel;
+    private DataViewModel dataViewModel;
     AppDatabase db = Room.databaseBuilder(App.getContext(),
             AppDatabase.class, "vehicle").allowMainThreadQueries().build();
 

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_group">Trust Technology</string>
     <string name="app_name">Talleringo</string>
     <string name="menu_sign_out">Logout</string>
     <string name="menu_about">About</string>
@@ -32,11 +30,8 @@
     <string name="title_add_maintenance">Add Maintenance</string>
     <string name="add_maintenance_vehiculo">Vehicle:</string>
     <string name="add_maintenance_detalle">Detail:</string>
-    <string name="add_maintenance_cost">Cost:</string>
+    <string name="add_maintenance_costo">Cost:</string>
     <string name="add_maintenance_fechaprog">Scheduled date:</string>
-
-    <string name="title_add_record">Add Record</string>
-    <string name="add_record_date_completed">Date:</string>
     <string name="hint_date">Select the date</string>
 
     <string name="add_settings_sincronizar">Sync up:</string>
@@ -53,8 +48,6 @@
     <string name="txt_vehicle_name">Tsuru</string>
     <string name="txt_vehicle_brand">Nissan</string>
     <string name="txt_vehicle_year">1982</string>
-
-    <string name="txt_about_developed">Developed by:</string>
     <string-array name="vehicles_array">
         <item>Nissan</item>
         <item>Kia</item>
@@ -71,8 +64,6 @@
     <string name = "txt_dialog_warning">Warning</string>
 
     <string name = "txt_card_maintenance_detail">Hola mundo  otra cosa Hola mundo  otra cosa Hola mundo  otra cosa Hola mundo  otra cosa</string>
-    <string name="txt_record_cost">$33.50</string>
-    <string name="txt_dollar_char">$</string>
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>

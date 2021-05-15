@@ -13,7 +13,7 @@
         android:textColor="@color/white"
         android:textSize="24dp"
         android:gravity="center"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"></TextView>
     
     <ScrollView
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+            "VEHICLE"
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
                 android:textSize="18dp"
                 android:gravity="left"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"></TextView>
             <Spinner
                 android:id="@+id/vehicle_text"
                 android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:background="@color/white"/>
-
+            "DETAIL"
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
                 android:textSize="18dp"
                 android:gravity="left"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"></TextView>
             <EditText
                 android:id="@+id/detail_text"
                 android:layout_width="match_parent"
@@ -60,8 +60,9 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:background="@color/white"
-                android:padding="10dp"/>
+                android:padding="10dp"></EditText>
 
+            "DATE"
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,7 +71,7 @@
                 android:textSize="18dp"
                 android:gravity="left"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"></TextView>
             <TextView
                 android:id="@+id/date_text"
                 android:layout_width="match_parent"
@@ -84,7 +85,7 @@
                 android:padding="5dp"
                 android:drawableTop="@drawable/calendar"
                 android:inputType="date"/>
-
+            "ACTIONS"
             <Button
                 android:id="@+id/btn_add_vehicle"
                 android:layout_width="match_parent"
@@ -98,7 +99,7 @@
                 android:padding="10dp"
                 android:text="@string/btn_add"
                 android:textAlignment="center"
-                android:backgroundTint="@color/gray_ligth"/>
+                android:backgroundTint="@color/gray_ligth"></Button>
             <Button
                 android:id="@+id/btn_cancel_vehicle"
                 android:layout_width="match_parent"
@@ -112,7 +113,7 @@
                 android:padding="10dp"
                 android:text="@string/btn_cancel"
                 android:textAlignment="center"
-                android:backgroundTint="@color/white"/>
+                android:backgroundTint="@color/white"></Button>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -13,6 +13,8 @@ public class Maintenance {
     @PrimaryKey(autoGenerate = true)
     public int ID;
 
+
+
     @ColumnInfo(name = "maintenance_detail")
     public String Detail;
 
@@ -31,4 +33,8 @@ public class Maintenance {
         this.Detail = Detail;
         this.Vehicle_Id = Vehicle_Id;
     }
+
+
+
+
 }

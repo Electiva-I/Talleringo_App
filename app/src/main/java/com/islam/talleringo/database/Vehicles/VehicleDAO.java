@@ -10,9 +10,6 @@ import java.util.List;
 
 @Dao
 public interface VehicleDAO {
-    @Query("Select count(*) from vehicle")
-    int countVehicles();
-
     @Query("Select * from vehicle")
     List<Vehicle> getAll();
 
