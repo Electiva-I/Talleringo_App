@@ -3,6 +3,9 @@ package com.islam.talleringo.database.Record;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import java.util.Objects;
+
 @Entity
 public class Record {
     @PrimaryKey(autoGenerate = true)
@@ -27,4 +30,16 @@ public class Record {
         this.Cost = Cost;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Record record = (Record) o;
+        return ID == record.ID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
+    }
 }

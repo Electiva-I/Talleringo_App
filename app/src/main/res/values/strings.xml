@@ -23,6 +23,13 @@
     <string name="label_text_maintenance">Listado de Mantenimientos</string>
 
     <string name="title_add_vehicle">Agregar Vehiculo</string>
+
+    <string name="title_update_dialog">Actualizar</string>
+
+    <string name = "txt_dialog_completed_maintenance">Mantenimiento Realizado</string>
+    <string name = "title_dialog_completed_maintenance">Detalle de Mantenimiento</string>
+
+
     <string name="add_vehicle_marca">Marca:</string>
     <string name="add_vehicle_modelo">Modelo:</string>
     <string name="add_vehicle_anio">Año:</string>
@@ -48,6 +55,7 @@
 
     <string name="btn_add">Agregar</string>
     <string name="btn_cancel">Cancelar</string>
+    <string name="btn_close">Cerrar</string>
     <string name="btn_save">Guardar</string>
 
     <string name="txt_vehicle_name">Tsuru</string>
@@ -58,6 +66,19 @@
 
     <string name="txt_record_cost">$33.50</string>
     <string name="txt_dollar_char">$</string>
+
+    <string name="txt_messages_vehicle_created">¡Vehiculo creado!</string>
+    <string name="txt_messages_vehicle_updated">¡Vehiculo actualizado!</string>
+    <string name="txt_messages_vehicle_deleted">¡Vehiculo Eliminado!</string>
+
+    <string name="txt_messages_maintenance_created">¡Matenimiento agendado!</string>
+    <string name="txt_messages_maintenance_updated">¡Matenimiento actualizado!</string>
+    <string name="txt_messages_maintenance_deleted">¡Matenimiento Eliminado!</string>
+    <string name="txt_messages_maintenance_transferred">¡Matenimiento guardado en historial!</string>
+
+    <string name="txt_messages_record_created">¡Registro creado!</string>
+    <string name="txt_messages_record_updated">¡Registro actualizado!</string>
+    <string name="txt_messages_record_deleted">¡Registro Eliminado!</string>
 
 
 

@@ -11,13 +11,18 @@ import android.view.ViewGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.islam.talleringo.R;
 import com.islam.talleringo.activities.MainActivity;
 import com.islam.talleringo.adapters.Vehicles_Adapter;
 import com.islam.talleringo.database.AppDatabase;
 import com.islam.talleringo.database.LiveData.DataViewModel;
+import com.islam.talleringo.database.Maintenances.Maintenance;
 import com.islam.talleringo.database.Vehicles.Vehicle;
 import com.islam.talleringo.dialogs.AddCarDialog;
+import com.islam.talleringo.dialogs.UpdateCardDialog;
+import com.islam.talleringo.dialogs.UpdateMaintenanceDialog;
 import com.islam.talleringo.utils.App;
 
 import androidx.annotation.NonNull;
@@ -36,11 +41,13 @@ public class VehicleFragment extends Fragment {
 
     private FloatingActionButton fabAddCar;
 
-    private DataViewModel dataViewModel;
+    private DataViewModel dataViewModel, updateDataViewModel;
     private RecyclerView vehiclesRV;
     private Vehicles_Adapter vehiclesAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private  List<Vehicle> vehiclesList;
+    AppDatabase db = Room.databaseBuilder(App.getContext(),
+            AppDatabase.class, "vehicle").allowMainThreadQueries().build();
     public VehicleFragment() {
         // Required empty public constructor
     }
@@ -60,14 +67,29 @@ public class VehicleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         dataViewModel = new ViewModelProvider(this).get(DataViewModel.class);
-        final Observer<Vehicle> namObserver = new Observer<Vehicle>() {
+        updateDataViewModel = new ViewModelProvider(this).get(DataViewModel.class);
+
+        final Observer<Vehicle> updateObserver = new Observer<Vehicle>() {
             @Override
             public void onChanged(Vehicle vehicle) {
-                vehiclesList.add(vehicle);
-                vehiclesAdapter.notifyItemInserted(vehiclesAdapter.getItemCount());
+                int position = vehiclesList.indexOf(vehicle);
+                vehiclesList.set(position, vehicle);
+                vehiclesAdapter.notifyDataSetChanged();
+                showMessage(R.string.txt_messages_vehicle_updated);
             }
         };
-        dataViewModel.getNewVehicle().observe(this, namObserver);
+
+        final Observer<Vehicle> createdObserver = new Observer<Vehicle>() {
+            @Override
+            public void onChanged(Vehicle vehicle) {
+                vehiclesList.add(db.vehicleDAO().getLastVehicle());
+                vehiclesAdapter.notifyItemInserted(vehiclesAdapter.getItemCount());
+                showMessage(R.string.txt_messages_vehicle_created);
+            }
+        };
+
+        dataViewModel.getNewVehicle().observe(this, createdObserver);
+        updateDataViewModel.getUpdatedVehicle().observe(this, updateObserver);
     }
 
     @Override
@@ -84,8 +106,7 @@ public class VehicleFragment extends Fragment {
             }
         });
 
-        AppDatabase db = Room.databaseBuilder(App.getContext(),
-                AppDatabase.class, "vehicle").allowMainThreadQueries().build();
+
 
         vehiclesRV.setLayoutManager(layoutManager);
         vehiclesList =  db.vehicleDAO().getAll();
@@ -101,7 +122,10 @@ public class VehicleFragment extends Fragment {
             popup.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()){
                     case R.id.vehicle_menu_delete:
-                        deleteVehicle(id, position, db);
+                        deleteVehicle(id, position);
+                        break;
+                    case  R.id.vehicle_menu_update:
+                        updateVehicles(id);
                         break;
                 }
                 return false;
@@ -111,19 +135,9 @@ public class VehicleFragment extends Fragment {
 
         vehiclesRV.setAdapter(vehiclesAdapter);
         vehiclesRV.setLayoutManager(layoutManager);
-        /*vehiclesRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                if (!recyclerView.canScrollVertically(1)) {
-                    fabAddCar.setVisibility(View.GONE);
-                } else  {
-                    fabAddCar.setVisibility(View.VISIBLE);
-                }
-            }
-        });*/
     }
 
-    private void deleteVehicle(int id, int position, AppDatabase db){
+    private void deleteVehicle(int id, int position){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(R.string.txt_dialog_delete)
                 .setPositiveButton(R.string.menu_delete, new DialogInterface.OnClickListener() {
@@ -135,6 +149,7 @@ public class VehicleFragment extends Fragment {
                 db.recordDAO().deleteIdByVehicle(ids);
                 vehiclesList.remove(position);
                 vehiclesAdapter.notifyItemRemoved(position);
+                showMessage(R.string.txt_messages_vehicle_deleted);
             }
         }).setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
             @Override
@@ -142,5 +157,15 @@ public class VehicleFragment extends Fragment {
                 dialog.cancel();
             }
         }).setTitle(R.string.txt_dialog_warning).show();
+    }
+
+    private void updateVehicles(int id){
+        Vehicle vehicle = db.vehicleDAO().getVehicle(id);
+        new UpdateCardDialog(updateDataViewModel, vehicle).show(getFragmentManager(), "addRecord");
+    }
+
+    private void showMessage(int message) {
+        Snackbar snackbar = Snackbar.make(getView(), message, BaseTransientBottomBar.LENGTH_SHORT);
+        snackbar.show();
     }
 }

@@ -13,7 +13,12 @@ public class DataViewModel extends ViewModel {
     private MutableLiveData<Vehicle> currentVehicles;
     private MutableLiveData<Maintenance> currentMaintenance;
     private MutableLiveData<Record> currentRecord;
-
+    //update data
+    private MutableLiveData<Record> updatedRecord;
+    private MutableLiveData<Maintenance> updatedMaintenance;
+    private MutableLiveData<Vehicle> updatedVehicle;
+    //deleted data
+    private MutableLiveData<Maintenance> deletedMaintenance;
     public MutableLiveData<Vehicle> getNewVehicle() {
         if (currentVehicles == null) {
             currentVehicles = new MutableLiveData<Vehicle>();
@@ -32,5 +37,34 @@ public class DataViewModel extends ViewModel {
             currentRecord = new MutableLiveData<Record>();
         }
         return currentRecord;
+    }
+
+    public MutableLiveData<Record> getUpdatedRecord() {
+        if (updatedRecord == null) {
+            updatedRecord = new MutableLiveData<Record>();
+        }
+        return updatedRecord;
+    }
+
+
+    public MutableLiveData<Maintenance> getUpdatedMaintenance() {
+        if (updatedMaintenance == null) {
+            updatedMaintenance = new MutableLiveData<Maintenance>();
+        }
+        return updatedMaintenance;
+    }
+
+    public MutableLiveData<Maintenance> getDeletedMaintenance() {
+        if (deletedMaintenance == null) {
+            deletedMaintenance = new MutableLiveData<Maintenance>();
+        }
+        return deletedMaintenance;
+    }
+
+    public MutableLiveData<Vehicle> getUpdatedVehicle() {
+        if (updatedVehicle == null) {
+            updatedVehicle = new MutableLiveData<Vehicle>();
+        }
+        return updatedVehicle;
     }
 }

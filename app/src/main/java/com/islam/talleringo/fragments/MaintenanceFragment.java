@@ -1,23 +1,31 @@
 package com.islam.talleringo.fragments;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.islam.talleringo.R;
 import com.islam.talleringo.adapters.Maintenance_Adapter;
 import com.islam.talleringo.adapters.Vehicles_Adapter;
 import com.islam.talleringo.database.AppDatabase;
 import com.islam.talleringo.database.LiveData.DataViewModel;
 import com.islam.talleringo.database.Maintenances.Maintenance;
+import com.islam.talleringo.database.Record.Record;
 import com.islam.talleringo.database.Vehicles.Vehicle;
 import com.islam.talleringo.dialogs.AddCarDialog;
 import com.islam.talleringo.dialogs.AddMaintenanceDialog;
+import com.islam.talleringo.dialogs.DetailMaintenanceDialog;
+import com.islam.talleringo.dialogs.UpdateMaintenanceDialog;
+import com.islam.talleringo.dialogs.UpdateRecordDialog;
 import com.islam.talleringo.utils.App;
 
 import androidx.annotation.NonNull;
@@ -38,7 +46,7 @@ public class MaintenanceFragment extends Fragment {
 
     AppDatabase db = Room.databaseBuilder(App.getContext(),
             AppDatabase.class, "vehicle").allowMainThreadQueries().build();
-    private DataViewModel dataViewModel;
+    private DataViewModel dataViewModel, updateDataViewModel, deletedDataViewModel;
     private RecyclerView maintenanceRV;
     private Maintenance_Adapter maintenanceAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -79,14 +87,40 @@ public class MaintenanceFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         dataViewModel = new ViewModelProvider(this).get(DataViewModel.class);
-        final Observer<Maintenance> namObserver = new Observer<Maintenance>() {
+        updateDataViewModel = new ViewModelProvider(this).get(DataViewModel.class);
+        deletedDataViewModel = new ViewModelProvider(this).get(DataViewModel.class);
+
+        final Observer<Maintenance> updateObserver = new Observer<Maintenance>() {
             @Override
             public void onChanged(Maintenance maintenance) {
-                maintenanceList.add(maintenance);
-                maintenanceAdapter.notifyItemInserted( maintenanceAdapter.getItemCount());
+                int position = maintenanceList.indexOf(maintenance);
+                maintenanceList.set(position, maintenance);
+                maintenanceAdapter.notifyDataSetChanged();
+                showMessage(R.string.txt_messages_maintenance_updated);
             }
         };
-        dataViewModel.getNewMaintenance().observe(this, namObserver);
+
+        final Observer<Maintenance> deleteObserver = new Observer<Maintenance>() {
+            @Override
+            public void onChanged(Maintenance maintenance) {
+                int position = maintenanceList.indexOf(maintenance);
+                maintenanceList.remove(position);
+                maintenanceAdapter.notifyDataSetChanged();
+                showMessage(R.string.txt_messages_maintenance_transferred);
+            }
+        };
+
+        final Observer<Maintenance> createObserver = new Observer<Maintenance>() {
+            @Override
+            public void onChanged(Maintenance maintenance) {
+                maintenanceList.add(db.maintenanceDAO().getLastMaintenance());
+                maintenanceAdapter.notifyItemInserted( maintenanceAdapter.getItemCount());
+                showMessage(R.string.txt_messages_maintenance_created);
+            }
+        };
+        dataViewModel.getNewMaintenance().observe(this, createObserver);
+        updateDataViewModel.getUpdatedMaintenance().observe(this, updateObserver);
+        deletedDataViewModel.getDeletedMaintenance().observe(this, deleteObserver);
     }
 
     private void initFragment() {
@@ -102,17 +136,21 @@ public class MaintenanceFragment extends Fragment {
         maintenanceAdapter = new Maintenance_Adapter(maintenanceList, R.layout.card_view_maintenance, new Maintenance_Adapter.OnItemClickListener() {
             @Override
             public void OnItemClick(int id, int position) {
-
+                detailMaintenance(id);
             }
         }, new Maintenance_Adapter.OnMenuItemClickListener() {
             @Override
             public void OnMenuItemClick(int id, int position, ImageButton button) {
                 PopupMenu popup = new PopupMenu(getContext(), button);
                 popup.getMenuInflater().inflate(R.menu.vehicle_menu, popup.getMenu());
+
                 popup.setOnMenuItemClickListener(item -> {
                     switch (item.getItemId()){
                         case R.id.vehicle_menu_delete:
                             deleteMaintenance(id, position, db);
+                            break;
+                        case  R.id.vehicle_menu_update:
+                            updateMaintenance(id);
                             break;
                     }
                     return false;
@@ -128,10 +166,10 @@ public class MaintenanceFragment extends Fragment {
         builder.setMessage(R.string.txt_dialog_delete).setPositiveButton(R.string.menu_delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                int[] ids = {id};
-                db.maintenanceDAO().deleteId(ids);
+                db.maintenanceDAO().deleteId(id);
                 maintenanceList.remove(position);
                 maintenanceAdapter.notifyItemRemoved(position);
+                showMessage(R.string.txt_messages_maintenance_deleted);
             }
         }).setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
             @Override
@@ -140,4 +178,21 @@ public class MaintenanceFragment extends Fragment {
             }
         }).setTitle(R.string.txt_dialog_warning).show();
     }
+
+    private void updateMaintenance(int id){
+        Maintenance maintenance = db.maintenanceDAO().getMaintenance(id);
+        new UpdateMaintenanceDialog(updateDataViewModel, maintenance).show(getFragmentManager(), "addRecord");
+    }
+
+    private void detailMaintenance(int id){
+        Maintenance maintenance = db.maintenanceDAO().getMaintenance(id);
+        new DetailMaintenanceDialog(deletedDataViewModel, maintenance).show(getFragmentManager(), "addRecord");
+    }
+
+    private void showMessage(int message) {
+        Snackbar snackbar = Snackbar.make(getView(), message, BaseTransientBottomBar.LENGTH_SHORT);
+        snackbar.show();
+    }
+
+
 }

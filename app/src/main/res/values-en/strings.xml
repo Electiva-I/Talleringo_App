@@ -29,6 +29,8 @@
     <string name="add_vehicle_anio">Year:</string>
     <string name="add_vehicle_image">Image:</string>
 
+    <string name="title_update_dialog">Update</string>
+
     <string name="title_add_maintenance">Add Maintenance</string>
     <string name="add_maintenance_vehiculo">Vehicle:</string>
     <string name="add_maintenance_detalle">Detail:</string>
@@ -48,6 +50,7 @@
 
     <string name="btn_add">Add</string>
     <string name="btn_cancel">Cancel</string>
+    <string name="btn_close">Close</string>
     <string name="btn_save">Save</string>
 
     <string name="txt_vehicle_name">Tsuru</string>
@@ -67,8 +70,24 @@
         <item>Seat</item>
     </string-array>
 
+    <string name="txt_messages_vehicle_created">Vehicle created!</string>
+    <string name="txt_messages_vehicle_updated">Updated vehicle!</string>
+    <string name="txt_messages_vehicle_deleted">Vehicle Eliminated!</string>
+
+    <string name="txt_messages_maintenance_created">Scheduled maintenance!</string>
+    <string name="txt_messages_maintenance_updated">Updated maintenance!</string>
+    <string name="txt_messages_maintenance_deleted">Maintenance Eliminated!</string>
+    <string name="txt_messages_maintenance_transferred">Maintenance saved in record!</string>
+
+    <string name="txt_messages_record_created">Record created!</string>
+    <string name="txt_messages_record_updated">Record updated!</string>
+    <string name="txt_messages_record_deleted">Record Deleted!</string>
+
     <string name = "txt_dialog_delete"> Keep in mind that if you delete a vehicle you will also delete the data that depends on it </string>
     <string name = "txt_dialog_warning">Warning</string>
+
+    <string name = "txt_dialog_completed_maintenance">Maintenance Performed</string>
+    <string name = "title_dialog_completed_maintenance">Maintenance Detail</string>
 
     <string name = "txt_card_maintenance_detail">Hola mundo  otra cosa Hola mundo  otra cosa Hola mundo  otra cosa Hola mundo  otra cosa</string>
     <string name="txt_record_cost">$33.50</string>

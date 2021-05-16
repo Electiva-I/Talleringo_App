@@ -46,7 +46,7 @@ public class Record_Adapter  extends RecyclerView.Adapter<Record_Adapter.ViewHol
 
 
         holder.bind(records.get(position).ID,
-                db.vehicleDAO().getVehicle(records.get(position).Vehicle_Id).get(0).toString(),
+                db.vehicleDAO().getVehicle(records.get(position).Vehicle_Id).toString(),
                 records.get(position).Creation_Date,
                 records.get(position).Detail,
                 records.get(position).Cost,

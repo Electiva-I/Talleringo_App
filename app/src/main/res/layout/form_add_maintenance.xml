@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:minWidth="400dp"
-    android:paddingBottom="15dp"
+    android:paddingBottom="5dp"
     android:background="@color/gray_dark">
     <TextView
         android:layout_width="match_parent"
@@ -85,34 +85,47 @@
                 android:drawableTop="@drawable/calendar"
                 android:inputType="date"/>
 
-            <Button
-                android:id="@+id/btn_add_vehicle"
+            <LinearLayout
+                android:layout_marginTop="20sp"
+                android:background="@color/gray_ligth"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                android:gravity="left"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="15dp"
-                android:padding="10dp"
-                android:text="@string/btn_add"
-                android:textAlignment="center"
-                android:backgroundTint="@color/gray_ligth"/>
-            <Button
-                android:id="@+id/btn_cancel_vehicle"
+                android:layout_height="1dp">
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="18dp"
-                android:gravity="left"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="15dp"
-                android:padding="10dp"
-                android:text="@string/btn_cancel"
-                android:textAlignment="center"
-                android:backgroundTint="@color/white"/>
+                android:gravity="end"
+                android:paddingEnd="15dp"
+                android:paddingStart="0dp"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btn_add_vehicle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:padding="10dp"
+                    android:text="@string/btn_add"
+                    android:background="#00FF0000"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textAlignment="center" />
+                <Button
+                    android:id="@+id/btn_cancel_vehicle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:padding="10dp"
+                    android:text="@string/btn_cancel"
+                    android:textAlignment="center"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="#00FF0000"/>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

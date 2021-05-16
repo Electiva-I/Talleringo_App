@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="400dp"
+    android:paddingBottom="5dp"
+    android:background="@color/gray_dark">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_dialog_completed_maintenance"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_maintenance_vehiculo"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:gravity="start"
+                        android:layout_marginStart="25dp" />
+                    <TextView
+                        android:id="@+id/vehicle_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:gravity="start"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="25dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_maintenance_detalle"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:gravity="start"
+                        android:layout_marginStart="25dp"/>
+                    <TextView
+                        android:id="@+id/detail_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:lines="2"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="25dp"
+                        android:padding="10dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_maintenance_fechaprog"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:gravity="start"
+                        android:layout_marginStart="25dp" />
+                    <TextView
+                        android:id="@+id/date_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:lines="2"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="25dp"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:padding="5dp" />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchCompleted"
+                android:padding="20dp"
+                android:layout_gravity="end"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="@string/txt_dialog_completed_maintenance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:id="@+id/cost_container"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_maintenance_cost"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:gravity="start"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="15dp"/>
+                <EditText
+                    android:id="@+id/txt_record_cost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:hint="@string/add_maintenance_cost"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:inputType="number"
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:autofillHints="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="20sp"
+                android:background="@color/gray_ligth"
+                android:layout_width="match_parent"
+                android:layout_height="1dp">
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:gravity="end"
+                android:paddingEnd="15dp"
+                android:paddingStart="0dp"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btn_add_vehicle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:padding="10dp"
+                    android:text="@string/btn_save"
+                    android:background="#00FF0000"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textAlignment="center" />
+                <Button
+                    android:id="@+id/btn_cancel_vehicle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:padding="10dp"
+                    android:text="@string/btn_close"
+                    android:textAlignment="center"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="#00FF0000"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

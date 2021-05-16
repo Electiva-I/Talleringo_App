@@ -45,7 +45,7 @@ public class Maintenance_Adapter  extends RecyclerView.Adapter<Maintenance_Adapt
 
 
         holder.bind(maintenances.get(position).ID,
-                db.vehicleDAO().getVehicle(maintenances.get(position).Vehicle_Id).get(0).toString(),
+                db.vehicleDAO().getVehicle(maintenances.get(position).Vehicle_Id).toString(),
                 maintenances.get(position).Schedule_Date,
                 maintenances.get(position).Detail,
                 itemClickListener,
