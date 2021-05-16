@@ -6,9 +6,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.islam.talleringo.database.Maintenances.Maintenance;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao

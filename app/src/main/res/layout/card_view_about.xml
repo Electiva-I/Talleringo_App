@@ -8,7 +8,8 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:layout_marginBottom="15dp"
-    app:cardCornerRadius="5dp">
+    app:cardCornerRadius="5dp"
+    android:focusable="true">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:backgroundTint="@color/light_gray"
@@ -25,7 +26,9 @@
             app:layout_constraintBottom_toTopOf="@+id/txt_vehicle_year"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/maintenance" />
+            app:srcCompat="@drawable/maintenance"
+            android:contentDescription="@string/app_name"
+            tools:ignore="UnknownIdInLayout" />
 
         <TextView
             android:id="@+id/txt_about_name"
@@ -49,7 +52,8 @@
             android:layout_marginTop="36dp"
             app:layout_constraintStart_toEndOf="@+id/imageViewProfile"
             app:layout_constraintTop_toBottomOf="@+id/txt_about_name"
-            app:srcCompat="@drawable/logo_github" />
+            app:srcCompat="@drawable/logo_github"
+            android:contentDescription="@string/app_name" />
 
         <TextView
             android:id="@+id/txt_about_user"
@@ -57,7 +61,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="40dp"
-            android:text="TextView"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toBottomOf="@+id/txt_about_name" />

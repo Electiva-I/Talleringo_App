@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
@@ -11,9 +12,9 @@
         android:layout_height="wrap_content"
         android:text="@string/title_add_vehicle"
         android:textColor="@color/white"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:gravity="center"
-        android:layout_marginTop="15dp"></TextView>
+        android:layout_marginTop="15dp"/>
     
     <ScrollView
         android:layout_width="match_parent"
@@ -27,57 +28,61 @@
                 android:layout_height="wrap_content"
                 android:text="@string/add_vehicle_marca"
                 android:textColor="@color/white"
-                android:textSize="18dp"
-                android:gravity="left"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"></TextView>
+                android:textSize="18sp"
+                android:gravity="start"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"/>
 
             <AutoCompleteTextView
                 android:id="@+id/brand_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:background="@color/white"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                tools:ignore="LabelFor" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/add_vehicle_modelo"
                 android:textColor="@color/white"
-                android:textSize="18dp"
-                android:gravity="left"
-                android:layout_marginLeft="25dp"
+                android:textSize="18sp"
+                android:gravity="start"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="15dp"/>
             <AutoCompleteTextView
                 android:id="@+id/model_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:background="@color/white"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                tools:ignore="LabelFor" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/add_vehicle_anio"
                 android:textColor="@color/white"
-                android:textSize="18dp"
-                android:gravity="left"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"></TextView>
+                android:textSize="18sp"
+                android:gravity="start"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"/>
             <EditText
                 android:id="@+id/year_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:inputType="number"
                 android:background="@color/white"
-                android:padding="10dp"></EditText>
+                android:padding="10dp"
+                android:autofillHints=""
+                tools:ignore="LabelFor" />
         </LinearLayout>
     </ScrollView>
     <LinearLayout
@@ -105,7 +110,8 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            tools:ignore="ButtonStyle,UnusedAttribute" />
         <Button
             android:id="@+id/btn_cancel_vehicle"
             android:layout_width="wrap_content"
@@ -118,7 +124,8 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:background="#00FF0000"/>
+            android:background="#00FF0000"
+            tools:ignore="ButtonStyle,UnusedAttribute" />
     </LinearLayout>
 
 </LinearLayout>

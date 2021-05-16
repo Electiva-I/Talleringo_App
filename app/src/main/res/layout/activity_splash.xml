@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/talleringo_splash" />
+        app:srcCompat="@drawable/talleringo_splash"
+        android:contentDescription="@string/app_name" />
 
     <TextView
         android:id="@+id/textView3"

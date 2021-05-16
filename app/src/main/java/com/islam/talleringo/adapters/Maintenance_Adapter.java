@@ -36,8 +36,7 @@ public class Maintenance_Adapter  extends RecyclerView.Adapter<Maintenance_Adapt
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(this.render_layout, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -76,19 +75,9 @@ public class Maintenance_Adapter  extends RecyclerView.Adapter<Maintenance_Adapt
             this.txtDate.setText(date);
             this.txtDetail.setText(detail);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    itemClickListener.OnItemClick(id, getAdapterPosition());
-                }
-            });
+            itemView.setOnClickListener(v -> itemClickListener.OnItemClick(id, getAdapterPosition()));
 
-            this.btnMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    menuItemClickListener.OnMenuItemClick(id, getAdapterPosition(), btnMenu);
-                }
-            });
+            this.btnMenu.setOnClickListener(v -> menuItemClickListener.OnMenuItemClick(id, getAdapterPosition(), btnMenu));
         }
     }
 

@@ -1,5 +1,11 @@
 package com.islam.talleringo.activities;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -9,17 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
-
 import com.facebook.login.LoginManager;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.islam.talleringo.R;
 import com.islam.talleringo.database.LiveData.DataViewModel;
 import com.islam.talleringo.database.Vehicles.Vehicle;
@@ -31,10 +28,13 @@ import com.islam.talleringo.fragments.SettingsFragment;
 import com.islam.talleringo.fragments.VehicleFragment;
 import com.islam.talleringo.utils.utils;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
     private MenuItem prevMenuItem ;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = new HomeFragment();
 
         DataViewModel dataViewModel = new ViewModelProvider(this).get(DataViewModel.class);
-        final Observer<Vehicle> namObserver = new Observer<Vehicle>() {
-            @Override
-            public void onChanged(Vehicle vehicle) {
-                navigationView.getMenu().getItem(2).setEnabled(true);
-            }
-        };
+        final Observer<Vehicle> namObserver = vehicle -> navigationView.getMenu().getItem(2).setEnabled(true);
         dataViewModel.getNewVehicle().observe(this, namObserver);
 
         getSupportFragmentManager()
@@ -58,63 +53,60 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.frame_layout, fragment)
                 .commit();
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (prevMenuItem != null) {
-                    prevMenuItem.setChecked(false);
-                }else {
-                    navigationView.getMenu().getItem(0).setChecked(false);
+        navigationView.setNavigationItemSelectedListener(item -> {
+            if (prevMenuItem != null) {
+                prevMenuItem.setChecked(false);
+            }else {
+                navigationView.getMenu().getItem(0).setChecked(false);
 
-                }
-
-                prevMenuItem = item;
-                boolean fragment_transaction = false;
-                Fragment fragment = null;
-                switch (item.getItemId()){
-                    case R.id.menu_signOut:
-                        utils.signOut();
-                        LoginManager.getInstance().logOut();
-                        writeSharedPreference(-1);
-                        startActivity(utils.updateUI(null,getApplicationContext()));
-                        finish();
-                        break;
-                    case R.id.menu_about:
-                        fragment = new AboutFragment();
-                        fragment_transaction = true;
-                        break;
-                    case R.id.menu_home:
-                        fragment = new HomeFragment();
-                        fragment_transaction = true;
-                        break;
-                    case R.id.menu_vehicles:
-                        fragment = new VehicleFragment();
-                        fragment_transaction = true;
-                        break;
-                    case R.id.menu_maintenance:
-                        fragment = new MaintenanceFragment();
-                        fragment_transaction = true;
-                        break;
-                    case R.id.menu_settings:
-                        fragment = new SettingsFragment();
-                        fragment_transaction = true;
-                        break;
-                    case R.id.menu_record:
-                        fragment = new RecordFragment();
-                        fragment_transaction = true;
-                        break;
-                }
-                if (fragment_transaction)   {
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.frame_layout, fragment)
-                            .commit();
-                    item.setChecked(true);
-                    getSupportActionBar().setTitle(item.getTitle());
-                    drawerLayout.closeDrawers();
-                }
-                return false;
             }
+
+            prevMenuItem = item;
+            boolean fragment_transaction = false;
+            Fragment fragment1 = null;
+            switch (item.getItemId()){
+                case R.id.menu_signOut:
+                    utils.signOut();
+                    LoginManager.getInstance().logOut();
+                    writeSharedPreference();
+                    startActivity(utils.updateUI(null,getApplicationContext()));
+                    finish();
+                    break;
+                case R.id.menu_about:
+                    fragment1 = new AboutFragment();
+                    fragment_transaction = true;
+                    break;
+                case R.id.menu_home:
+                    fragment1 = new HomeFragment();
+                    fragment_transaction = true;
+                    break;
+                case R.id.menu_vehicles:
+                    fragment1 = new VehicleFragment();
+                    fragment_transaction = true;
+                    break;
+                case R.id.menu_maintenance:
+                    fragment1 = new MaintenanceFragment();
+                    fragment_transaction = true;
+                    break;
+                case R.id.menu_settings:
+                    fragment1 = new SettingsFragment();
+                    fragment_transaction = true;
+                    break;
+                case R.id.menu_record:
+                    fragment1 = new RecordFragment();
+                    fragment_transaction = true;
+                    break;
+            }
+            if (fragment_transaction)   {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frame_layout, fragment1)
+                        .commit();
+                item.setChecked(true);
+                Objects.requireNonNull(getSupportActionBar()).setTitle(item.getTitle());
+                drawerLayout.closeDrawers();
+            }
+            return false;
         });
         setToolbar();
 
@@ -129,26 +121,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void writeSharedPreference(int type) {
+    private void writeSharedPreference() {
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("type", type);
-        editor.commit();
+        editor.putInt("type", -1);
+        editor.apply();
     }
     private void  setToolbar() {
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_burger);
+        Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_burger);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            drawerLayout.openDrawer(GravityCompat.START);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

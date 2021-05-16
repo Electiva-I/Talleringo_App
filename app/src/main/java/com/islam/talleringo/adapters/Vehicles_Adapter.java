@@ -31,8 +31,7 @@ public class Vehicles_Adapter  extends RecyclerView.Adapter<Vehicles_Adapter.Vie
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(this.render_layout, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -69,19 +68,9 @@ public class Vehicles_Adapter  extends RecyclerView.Adapter<Vehicles_Adapter.Vie
             this.txtBrand.setText(brand);
             this.txtYear.setText(year);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    itemClickListener.OnItemClick(id, getAdapterPosition());
-                }
-            });
+            itemView.setOnClickListener(v -> itemClickListener.OnItemClick(id, getAdapterPosition()));
 
-            this.btnMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    menuItemClickListener.OnMenuItemClick(id, getAdapterPosition(), btnMenu);
-                }
-            });
+            this.btnMenu.setOnClickListener(v -> menuItemClickListener.OnMenuItemClick(id, getAdapterPosition(), btnMenu));
         }
     }
 

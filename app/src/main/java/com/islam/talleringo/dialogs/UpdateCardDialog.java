@@ -21,13 +21,15 @@ import com.islam.talleringo.database.LiveData.DataViewModel;
 import com.islam.talleringo.database.Vehicles.Vehicle;
 import com.islam.talleringo.utils.App;
 
+import java.util.Objects;
+
 public class UpdateCardDialog  extends DialogFragment {
 
     private Button btn_add, btn_cancel;
     private AutoCompleteTextView brand, model;
     private EditText year;
     private final DataViewModel dataViewModel;
-    private Vehicle vehicle;
+    private final Vehicle vehicle;
 
     public  UpdateCardDialog(DataViewModel dataViewModel, Vehicle vehicle){
         this.dataViewModel = dataViewModel;
@@ -54,33 +56,24 @@ public class UpdateCardDialog  extends DialogFragment {
         year.setText(vehicle.Year);
 
         String [] vehicles_array = getResources().getStringArray(R.array.vehicles_array);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, vehicles_array);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, vehicles_array);
         brand.setAdapter(adapter);
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
-        return dialog;
+        return super.onCreateDialog(savedInstanceState);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        btn_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addVehicle(model.getText().toString(), brand.getText().toString(), year.getText().toString());
-                getDialog().dismiss();
-            }
+        btn_add.setOnClickListener(view -> {
+            addVehicle(model.getText().toString(), brand.getText().toString(), year.getText().toString());
+            Objects.requireNonNull(getDialog()).dismiss();
         });
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().cancel();
-            }
-        });
+        btn_cancel.setOnClickListener(view -> Objects.requireNonNull(getDialog()).cancel());
     }
 
     private void addVehicle(String model, String brand, String year){

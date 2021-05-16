@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:minWidth="400dp"
     android:paddingBottom="5dp"
     android:background="@color/gray_dark">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/title_add_maintenance"
         android:textColor="@color/white"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:gravity="center"
-        android:layout_marginTop="15dp"/>
-    
+        android:layout_marginTop="15dp" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,49 +32,54 @@
                 android:layout_height="wrap_content"
                 android:text="@string/add_maintenance_vehiculo"
                 android:textColor="@color/white"
-                android:textSize="18dp"
-                android:gravity="left"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"/>
+                android:textSize="18sp"
+                android:gravity="start"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp" />
+
             <Spinner
                 android:id="@+id/vehicle_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:background="@color/white"/>
+                android:background="@color/white" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/add_maintenance_detalle"
                 android:textColor="@color/white"
-                android:textSize="18dp"
-                android:gravity="left"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"/>
+                android:textSize="18sp"
+                android:gravity="start"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp" />
+
             <EditText
                 android:id="@+id/detail_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:lines="2"
                 android:inputType="textMultiLine"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:background="@color/white"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                android:autofillHints=""
+                tools:ignore="LabelFor" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/add_maintenance_fechaprog"
                 android:textColor="@color/white"
-                android:textSize="18dp"
-                android:gravity="left"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"/>
+                android:textSize="18sp"
+                android:gravity="start"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp" />
+
             <TextView
                 android:id="@+id/date_text"
                 android:layout_width="match_parent"
@@ -82,15 +91,14 @@
                 android:hint="@string/hint_date"
                 android:textStyle="bold"
                 android:padding="5dp"
-                android:drawableTop="@drawable/calendar"
-                android:inputType="date"/>
+                app:drawableTopCompat="@drawable/calendar" />
 
             <LinearLayout
                 android:layout_marginTop="20sp"
                 android:background="@color/gray_ligth"
                 android:layout_width="match_parent"
-                android:layout_height="1dp">
-            </LinearLayout>
+                android:layout_height="1dp"/>
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -98,6 +106,7 @@
                 android:paddingEnd="15dp"
                 android:paddingStart="0dp"
                 android:layout_height="wrap_content">
+
                 <Button
                     android:id="@+id/btn_add_vehicle"
                     android:layout_width="wrap_content"
@@ -110,7 +119,9 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     android:clickable="true"
                     android:focusable="true"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    tools:ignore="ButtonStyle,UnusedAttribute" />
+
                 <Button
                     android:id="@+id/btn_cancel_vehicle"
                     android:layout_width="wrap_content"
@@ -123,7 +134,8 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="#00FF0000"/>
+                    android:background="#00FF0000"
+                    tools:ignore="ButtonStyle,UnusedAttribute" />
             </LinearLayout>
 
         </LinearLayout>

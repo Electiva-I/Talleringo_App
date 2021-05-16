@@ -1,5 +1,6 @@
 package com.islam.talleringo.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,6 @@ import androidx.room.Room;
 
 import com.islam.talleringo.R;
 import com.islam.talleringo.database.AppDatabase;
-import com.islam.talleringo.database.Maintenances.Maintenance;
 import com.islam.talleringo.database.Record.Record;
 import com.islam.talleringo.utils.App;
 
@@ -37,8 +37,7 @@ public class Record_Adapter  extends RecyclerView.Adapter<Record_Adapter.ViewHol
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(this.render_layout, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -75,6 +74,7 @@ public class Record_Adapter  extends RecyclerView.Adapter<Record_Adapter.ViewHol
             this.txtCost = itemView.findViewById(R.id.txt_record_cost);
         }
 
+        @SuppressLint("SetTextI18n")
         public void bind(int id, String model, String date, String detail, Float cost, OnItemClickListener itemClickListener, OnMenuItemClickListener menuItemClickListener){
             this.txtModel.setText(model);
             this.txtDate.setText(date);
@@ -82,19 +82,9 @@ public class Record_Adapter  extends RecyclerView.Adapter<Record_Adapter.ViewHol
              App.getContext().getString(R.string.txt_dollar_char);
             this.txtCost.setText(App.getContext().getString(R.string.txt_dollar_char) + cost);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    itemClickListener.OnItemClick(id, getAdapterPosition());
-                }
-            });
+            itemView.setOnClickListener(v -> itemClickListener.OnItemClick(id, getAdapterPosition()));
 
-            this.btnMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    menuItemClickListener.OnMenuItemClick(id, getAdapterPosition(), btnMenu);
-                }
-            });
+            this.btnMenu.setOnClickListener(v -> menuItemClickListener.OnMenuItemClick(id, getAdapterPosition(), btnMenu));
         }
     }
 

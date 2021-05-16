@@ -7,8 +7,6 @@ import com.islam.talleringo.database.Maintenances.Maintenance;
 import com.islam.talleringo.database.Record.Record;
 import com.islam.talleringo.database.Vehicles.Vehicle;
 
-import java.util.List;
-
 public class DataViewModel extends ViewModel {
     private MutableLiveData<Vehicle> currentVehicles;
     private MutableLiveData<Maintenance> currentMaintenance;
@@ -21,27 +19,27 @@ public class DataViewModel extends ViewModel {
     private MutableLiveData<Maintenance> deletedMaintenance;
     public MutableLiveData<Vehicle> getNewVehicle() {
         if (currentVehicles == null) {
-            currentVehicles = new MutableLiveData<Vehicle>();
+            currentVehicles = new MutableLiveData<>();
         }
         return currentVehicles;
     }
     public MutableLiveData<Maintenance> getNewMaintenance() {
         if (currentMaintenance == null) {
-            currentMaintenance = new MutableLiveData<Maintenance>();
+            currentMaintenance = new MutableLiveData<>();
         }
         return currentMaintenance;
     }
 
     public MutableLiveData<Record> getNewRecord() {
         if (currentRecord == null) {
-            currentRecord = new MutableLiveData<Record>();
+            currentRecord = new MutableLiveData<>();
         }
         return currentRecord;
     }
 
     public MutableLiveData<Record> getUpdatedRecord() {
         if (updatedRecord == null) {
-            updatedRecord = new MutableLiveData<Record>();
+            updatedRecord = new MutableLiveData<>();
         }
         return updatedRecord;
     }
@@ -49,21 +47,21 @@ public class DataViewModel extends ViewModel {
 
     public MutableLiveData<Maintenance> getUpdatedMaintenance() {
         if (updatedMaintenance == null) {
-            updatedMaintenance = new MutableLiveData<Maintenance>();
+            updatedMaintenance = new MutableLiveData<>();
         }
         return updatedMaintenance;
     }
 
     public MutableLiveData<Maintenance> getDeletedMaintenance() {
         if (deletedMaintenance == null) {
-            deletedMaintenance = new MutableLiveData<Maintenance>();
+            deletedMaintenance = new MutableLiveData<>();
         }
         return deletedMaintenance;
     }
 
     public MutableLiveData<Vehicle> getUpdatedVehicle() {
         if (updatedVehicle == null) {
-            updatedVehicle = new MutableLiveData<Vehicle>();
+            updatedVehicle = new MutableLiveData<>();
         }
         return updatedVehicle;
     }

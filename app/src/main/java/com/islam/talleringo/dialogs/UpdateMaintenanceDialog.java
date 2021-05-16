@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,6 +28,7 @@ import com.islam.talleringo.utils.App;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 public class UpdateMaintenanceDialog  extends DialogFragment {
 
@@ -37,7 +37,7 @@ public class UpdateMaintenanceDialog  extends DialogFragment {
     private EditText txtDetail;
     private TextView txtDate;
     private int year, month, day;
-    private Maintenance maintenance;
+    private final Maintenance maintenance;
     private final DataViewModel dataViewModel;
 
     AppDatabase db = Room.databaseBuilder(App.getContext(),
@@ -72,7 +72,7 @@ public class UpdateMaintenanceDialog  extends DialogFragment {
 
 
         List<Vehicle> listVehicles = db.vehicleDAO().getAll();
-        ArrayAdapter<Vehicle> adapter = new ArrayAdapter<Vehicle>(getContext(),
+        ArrayAdapter<Vehicle> adapter = new ArrayAdapter<>(getContext(),
                 R.layout.spinner_item, listVehicles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -90,28 +90,22 @@ public class UpdateMaintenanceDialog  extends DialogFragment {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        txtDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        getContext(),
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        setListener,
-                        year,
-                        month,
-                        day);
-                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                datePickerDialog.show();
-            }
+        txtDate.setOnClickListener(view -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    getContext(),
+                    android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                    setListener,
+                    year,
+                    month,
+                    day);
+            datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            datePickerDialog.show();
         });
 
-        setListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int y, int m, int d) {
-                month = m+1;
-                String date = d+"/"+m+"/"+y;
-                txtDate.setText(date);
-            }
+        setListener = (datePicker, y, m, d) -> {
+            month = m+1;
+            String date = d+"/"+m+"/"+y;
+            txtDate.setText(date);
         };
 
     }
@@ -119,35 +113,25 @@ public class UpdateMaintenanceDialog  extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
-        return dialog;
+        return super.onCreateDialog(savedInstanceState);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        btn_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Vehicle vehicle = (Vehicle) spinnerVehicle.getSelectedItem();
-                String detail = txtDetail.getText().toString();
-                String creation_date = txtDate.getText().toString();
+        btn_add.setOnClickListener(view -> {
+            Vehicle vehicle = (Vehicle) spinnerVehicle.getSelectedItem();
+            String detail = txtDetail.getText().toString();
 
 
-                maintenance.Schedule_Date = creation_date;
-                maintenance.Detail = detail;
-                maintenance.Vehicle_Id = vehicle.ID;
+            maintenance.Schedule_Date = txtDate.getText().toString();
+            maintenance.Detail = detail;
+            maintenance.Vehicle_Id = vehicle.ID;
 
-                db.maintenanceDAO().update(maintenance);
-                dataViewModel.getUpdatedMaintenance().setValue(maintenance);
-                getDialog().dismiss();
-            }
+            db.maintenanceDAO().update(maintenance);
+            dataViewModel.getUpdatedMaintenance().setValue(maintenance);
+            Objects.requireNonNull(getDialog()).dismiss();
         });
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().cancel();
-            }
-        });
+        btn_cancel.setOnClickListener(view -> Objects.requireNonNull(getDialog()).cancel());
     }
 }

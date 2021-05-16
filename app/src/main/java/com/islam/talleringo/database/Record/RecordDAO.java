@@ -6,9 +6,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.islam.talleringo.database.Maintenances.Maintenance;
-import com.islam.talleringo.database.Vehicles.Vehicle;
-
 import java.util.List;
 
 @Dao

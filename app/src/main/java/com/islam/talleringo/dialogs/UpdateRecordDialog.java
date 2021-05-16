@@ -1,5 +1,6 @@
 package com.islam.talleringo.dialogs;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.graphics.Color;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.room.Room;
 
-import com.google.android.gms.common.util.CollectionUtils;
 import com.islam.talleringo.R;
 import com.islam.talleringo.database.AppDatabase;
 import com.islam.talleringo.database.LiveData.DataViewModel;
@@ -30,6 +29,7 @@ import com.islam.talleringo.utils.App;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 public class UpdateRecordDialog  extends DialogFragment {
 
@@ -38,7 +38,7 @@ public class UpdateRecordDialog  extends DialogFragment {
     private EditText txtDetail, txtCost;
     private TextView txtDate;
     private int year, month, day;
-    private Record record;
+    private final Record record;
     private final DataViewModel dataViewModel;
 
     AppDatabase db = Room.databaseBuilder(App.getContext(),
@@ -59,6 +59,7 @@ public class UpdateRecordDialog  extends DialogFragment {
         initDialog(view);
         return view;
     }
+    @SuppressLint("SetTextI18n")
     private void initDialog(View view){
         btn_add = view.findViewById(R.id.btn_add_vehicle);
         btn_add.setText(R.string.title_update_dialog);
@@ -74,7 +75,7 @@ public class UpdateRecordDialog  extends DialogFragment {
 
 
         List<Vehicle> listVehicles = db.vehicleDAO().getAll();
-        ArrayAdapter<Vehicle> adapter = new ArrayAdapter<Vehicle>(getContext(),
+        ArrayAdapter<Vehicle> adapter = new ArrayAdapter<>(getContext(),
                 R.layout.spinner_item, listVehicles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -92,28 +93,22 @@ public class UpdateRecordDialog  extends DialogFragment {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        txtDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        getContext(),
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        setListener,
-                        year,
-                        month,
-                        day);
-                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                datePickerDialog.show();
-            }
+        txtDate.setOnClickListener(view -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    getContext(),
+                    android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                    setListener,
+                    year,
+                    month,
+                    day);
+            datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            datePickerDialog.show();
         });
 
-        setListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int y, int m, int d) {
-                month = m+1;
-                String date = d+"/"+m+"/"+y;
-                txtDate.setText(date);
-            }
+        setListener = (datePicker, y, m, d) -> {
+            month = m+1;
+            String date = d+"/"+m+"/"+y;
+            txtDate.setText(date);
         };
 
     }
@@ -121,37 +116,27 @@ public class UpdateRecordDialog  extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
-        return dialog;
+        return super.onCreateDialog(savedInstanceState);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        btn_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Vehicle vehicle = (Vehicle) spinnerVehicle.getSelectedItem();
-                String detail = txtDetail.getText().toString();
-                String creation_date = txtDate.getText().toString();
-                float  cost = Float.parseFloat(txtCost.getText().toString());
+        btn_add.setOnClickListener(view -> {
+            Vehicle vehicle = (Vehicle) spinnerVehicle.getSelectedItem();
+            String detail = txtDetail.getText().toString();
+            String creation_date = txtDate.getText().toString();
 
-                record.Cost = cost;
-                record.Creation_Date = creation_date;
-                record.Detail = detail;
-                record.Vehicle_Id = vehicle.ID;
+            record.Cost = Float.parseFloat(txtCost.getText().toString());
+            record.Creation_Date = creation_date;
+            record.Detail = detail;
+            record.Vehicle_Id = vehicle.ID;
 
-                db.recordDAO().update(record);
-                dataViewModel.getUpdatedRecord().setValue(record);
-                getDialog().dismiss();
-            }
+            db.recordDAO().update(record);
+            dataViewModel.getUpdatedRecord().setValue(record);
+            Objects.requireNonNull(getDialog()).dismiss();
         });
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().cancel();
-            }
-        });
+        btn_cancel.setOnClickListener(view -> Objects.requireNonNull(getDialog()).cancel());
     }
 
 }

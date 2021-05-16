@@ -4,18 +4,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import com.bumptech.glide.Glide;
 import com.islam.talleringo.R;
-import com.islam.talleringo.database.AppDatabase;
-import com.islam.talleringo.database.Maintenances.Maintenance;
 import com.islam.talleringo.models.Develops;
 import com.islam.talleringo.utils.App;
 
@@ -35,8 +31,7 @@ public class About_Adapter  extends RecyclerView.Adapter<About_Adapter.ViewHolde
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(this.render_layout, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -73,12 +68,7 @@ public class About_Adapter  extends RecyclerView.Adapter<About_Adapter.ViewHolde
                     .circleCrop()
                     .into(imageViewProfile);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    itemClickListener.OnItemClick(user, getAdapterPosition());
-                }
-            });
+            itemView.setOnClickListener(v -> itemClickListener.OnItemClick(user, getAdapterPosition()));
         }
     }
 

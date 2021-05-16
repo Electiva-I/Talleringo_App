@@ -8,7 +8,8 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:layout_marginBottom="15dp"
-    app:cardCornerRadius="5dp">
+    app:cardCornerRadius="5dp"
+    android:focusable="true">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:backgroundTint="@color/light_gray"
@@ -24,7 +25,9 @@
             app:layout_constraintBottom_toTopOf="@+id/txt_vehicle_year"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/maintenance" />
+            app:srcCompat="@drawable/maintenance"
+            android:contentDescription="@string/app_name"
+            tools:ignore="UnknownIdInLayout" />
 
         <TextView
             android:id="@+id/txt_about_name"
@@ -82,7 +85,8 @@
             android:background="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_pop_menu" />
+            app:srcCompat="@drawable/ic_pop_menu"
+            android:contentDescription="@string/app_name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -1,9 +1,6 @@
 package com.islam.talleringo.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -25,10 +25,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,10 +37,6 @@ import com.islam.talleringo.utils.utils;
 
 
 public class LoginActivity extends AppCompatActivity {
-    private SignInButton signInButtonGoogle;
-    private LoginButton facebookLoginButton;
-    private Button loginButton;
-    private View googleButton;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -59,24 +53,21 @@ public class LoginActivity extends AppCompatActivity {
 
     private void init(){
         mAuth = FirebaseAuth.getInstance();
-        loginButton = findViewById(R.id.btnLogin);
+        Button loginButton = findViewById(R.id.btnLogin);
         initFacebookButton();
         initGoogleButton();
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(utils.goTo(getApplicationContext(), MainActivity.class));
-                writeSharedPreference(0);
-                finish();
-            }
+        loginButton.setOnClickListener(v -> {
+            startActivity(utils.goTo(getApplicationContext(), MainActivity.class));
+            writeSharedPreference(0);
+            finish();
         });
     }
 
     private void initGoogleButton() {
-        signInButtonGoogle = findViewById(R.id.sign_in_button);
+        @SuppressLint("CutPasteId") SignInButton signInButtonGoogle = findViewById(R.id.sign_in_button);
 
-        googleButton = findViewById(R.id.sign_in_button);
+        @SuppressLint("CutPasteId") View googleButton = findViewById(R.id.sign_in_button);
         signInButtonGoogle.setSize(SignInButton.SIZE_WIDE);
 
         // Configure Google Sign In
@@ -87,16 +78,11 @@ public class LoginActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        googleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
+        googleButton.setOnClickListener(v -> signIn());
     }
     private void initFacebookButton() {
         mCallbackManager = CallbackManager.Factory.create();
-        facebookLoginButton = findViewById(R.id.login_button_facebook);
+        LoginButton facebookLoginButton = findViewById(R.id.login_button_facebook);
         facebookLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -131,21 +117,18 @@ public class LoginActivity extends AppCompatActivity {
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            startActivity(utils.updateUI(user, getApplicationContext()));
-                            writeSharedPreference(1);
-                            finish();
-                        } else {
-                            // If sign in fails, display AddMaintenanceDialog message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            startActivity(utils.updateUI(null, getApplicationContext()));
-                        }
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithCredential:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        startActivity(utils.updateUI(user, getApplicationContext()));
+                        writeSharedPreference(1);
+                        finish();
+                    } else {
+                        // If sign in fails, display AddMaintenanceDialog message to the user.
+                        Log.w(TAG, "signInWithCredential:failure", task.getException());
+                        startActivity(utils.updateUI(null, getApplicationContext()));
                     }
                 });
     }
@@ -160,23 +143,20 @@ public class LoginActivity extends AppCompatActivity {
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            startActivity(utils.updateUI(user, getApplicationContext()));
-                            writeSharedPreference(1);
-                            finish();
-                        } else {
-                            // If sign in fails, display AddMaintenanceDialog message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(getApplicationContext(), "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            startActivity(utils.updateUI(null, getApplicationContext()));
-                        }
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithCredential:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        startActivity(utils.updateUI(user, getApplicationContext()));
+                        writeSharedPreference(1);
+                        finish();
+                    } else {
+                        // If sign in fails, display AddMaintenanceDialog message to the user.
+                        Log.w(TAG, "signInWithCredential:failure", task.getException());
+                        Toast.makeText(getApplicationContext(), "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                        startActivity(utils.updateUI(null, getApplicationContext()));
                     }
                 });
     }
@@ -185,6 +165,7 @@ public class LoginActivity extends AppCompatActivity {
         try {
             // Google Sign In was successful, authenticate with Firebase
             GoogleSignInAccount account = task.getResult(ApiException.class);
+            assert account != null;
             Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
             firebaseAuthWithGoogle(account.getIdToken());
 
@@ -198,7 +179,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("type", type);
-        editor.commit();
+        editor.apply();
     }
 
 

@@ -1,5 +1,6 @@
 package com.islam.talleringo.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,7 +17,6 @@ import com.islam.talleringo.utils.App;
 
 
 public class HomeFragment extends Fragment {
-    private TextView txtVehicles, txtMaintenance, txtHistory;
     AppDatabase db = Room.databaseBuilder(App.getContext(),
             AppDatabase.class, "vehicle").allowMainThreadQueries().build();
     public HomeFragment() {
@@ -37,10 +37,11 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("SetTextI18n")
     private  void initHome(View view) {
-        txtHistory = view.findViewById(R.id.txt_history_counter);
-        txtMaintenance = view.findViewById(R.id.txt_maintenance_counter);
-        txtVehicles = view.findViewById(R.id.txt_vehicle_counter);
+        TextView txtHistory = view.findViewById(R.id.txt_history_counter);
+        TextView txtMaintenance = view.findViewById(R.id.txt_maintenance_counter);
+        TextView txtVehicles = view.findViewById(R.id.txt_vehicle_counter);
 
         txtMaintenance.setText(db.maintenanceDAO().countMaintenance()+"");
         txtVehicles.setText(db.vehicleDAO().countVehicles()+"");
