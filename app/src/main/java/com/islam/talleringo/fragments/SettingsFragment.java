@@ -1,5 +1,7 @@
 package com.islam.talleringo.fragments;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.islam.talleringo.R;
+import com.islam.talleringo.notifications.NotificationHandler;
 
 import java.util.Calendar;
 
@@ -39,7 +42,7 @@ public class SettingsFragment extends Fragment {
         hora = view.findViewById(R.id.hora_text);
         save = view.findViewById(R.id.btn_save);
 
-        save.setOnClickListener(view12 -> Toast.makeText(getContext(), "Saving ...", Toast.LENGTH_SHORT).show());
+        save.setOnClickListener(view12 -> sendTestNotification());
 
         hora.setOnClickListener(view1 -> {
             TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), (timePicker, i, i1) -> {
@@ -55,6 +58,18 @@ public class SettingsFragment extends Fragment {
         });
 
         return view;
+    }
+    int counter = 0;
+    private void sendTestNotification(){
+
+        Toast.makeText(getContext(), "asda", Toast.LENGTH_LONG).show();
+        NotificationHandler handler = new NotificationHandler(getContext());
+        Notification.Builder builder = handler.createNotificationBuilder("Prueba "+ counter, "Notificacion de prueba", true);
+        ++counter;
+            handler.getNotificationManager().notify(counter, builder.build());
+            handler.publishNotificationSummaryGroup(true);
+
+
     }
 
 }
