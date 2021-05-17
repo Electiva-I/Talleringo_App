@@ -75,12 +75,14 @@ public class UpdateRecordDialog  extends DialogFragment {
 
 
         List<Vehicle> listVehicles = db.vehicleDAO().getAll();
+        db.close();
         ArrayAdapter<Vehicle> adapter = new ArrayAdapter<>(getContext(),
                 R.layout.spinner_item, listVehicles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerVehicle.setAdapter(adapter);
         int pos = listVehicles.indexOf(db.vehicleDAO().getVehicle(record.Vehicle_Id));
+        db.close();
         spinnerVehicle.setSelection(pos);
 
         CallDateDialog();
@@ -133,6 +135,7 @@ public class UpdateRecordDialog  extends DialogFragment {
             record.Vehicle_Id = vehicle.ID;
 
             db.recordDAO().update(record);
+            db.close();
             dataViewModel.getUpdatedRecord().setValue(record);
             Objects.requireNonNull(getDialog()).dismiss();
         });

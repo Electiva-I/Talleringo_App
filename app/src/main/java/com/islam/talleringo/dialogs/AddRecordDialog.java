@@ -64,6 +64,7 @@ public class AddRecordDialog extends DialogFragment {
         txtCost = view.findViewById(R.id.cost_text);
         ArrayAdapter<Vehicle> adapter = new ArrayAdapter<>(getContext(),
                 R.layout.spinner_item, db.vehicleDAO().getAll());
+        db.close();
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerVehicle.setAdapter(adapter);
@@ -113,6 +114,7 @@ public class AddRecordDialog extends DialogFragment {
 
             Record record = new Record(vehicle.ID, detail, creation_date, cost );
             db.recordDAO().insertAll(record);
+            db.close();
             dataViewModel.getNewRecord().setValue(record);
             Objects.requireNonNull(getDialog()).dismiss();
         });

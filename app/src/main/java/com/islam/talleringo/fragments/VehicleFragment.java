@@ -74,6 +74,7 @@ public class VehicleFragment extends Fragment {
 
         final Observer<Vehicle> createdObserver = vehicle -> {
             vehiclesList.add(db.vehicleDAO().getLastVehicle());
+            db.close();
             vehiclesAdapter.notifyItemInserted(vehiclesAdapter.getItemCount());
             showMessage(R.string.txt_messages_vehicle_created);
         };
@@ -98,6 +99,7 @@ public class VehicleFragment extends Fragment {
 
         vehiclesRV.setLayoutManager(layoutManager);
         vehiclesList = db.vehicleDAO().getAll();
+        db.close();
 
         vehiclesAdapter = new Vehicles_Adapter(vehiclesList, R.layout.card_view_vehicle, (id, position) -> {
             //open vehicles dialog
@@ -130,6 +132,7 @@ public class VehicleFragment extends Fragment {
                     db.vehicleDAO().deleteId(ids);
                     db.maintenanceDAO().deleteIdByVehicle(ids);
                     db.recordDAO().deleteIdByVehicle(ids);
+                    db.close();
                     vehiclesList.remove(position);
                     vehiclesAdapter.notifyItemRemoved(position);
                     showMessage(R.string.txt_messages_vehicle_deleted);

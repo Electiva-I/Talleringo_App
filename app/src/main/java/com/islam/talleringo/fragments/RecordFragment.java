@@ -71,6 +71,7 @@ public class RecordFragment extends Fragment {
         });
 
         recordList = db.recordDAO().getAll();
+        db.close();
         recordRV.setLayoutManager(layoutManager);
         recordAdapter = new Record_Adapter(recordList, R.layout.card_view_record, (id, position) -> {
 
@@ -99,6 +100,7 @@ public class RecordFragment extends Fragment {
         builder.setMessage(R.string.txt_dialog_delete).setPositiveButton(R.string.menu_delete, (dialog, which) -> {
             int[] ids = {id};
             db.recordDAO().deleteId(ids);
+            db.close();
             recordList.remove(position);
             recordAdapter.notifyItemRemoved(position);
             showMessage(R.string.txt_messages_record_deleted);
@@ -107,6 +109,7 @@ public class RecordFragment extends Fragment {
 
     private void updateRecord(int id) {
         Record record = db.recordDAO().getRecord(id);
+        db.close();
         assert getFragmentManager() != null;
         new UpdateRecordDialog(updateDataViewModel, record).show(getFragmentManager(), "addRecord");
     }
@@ -126,6 +129,7 @@ public class RecordFragment extends Fragment {
 
         final Observer<Record> createdObserver = record -> {
             recordList.add(db.recordDAO().getLastRecord());
+            db.close();
             recordAdapter.notifyItemInserted(recordAdapter.getItemCount());
             showMessage(R.string.txt_messages_record_created);
         };

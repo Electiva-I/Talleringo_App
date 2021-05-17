@@ -74,6 +74,7 @@ public class AddCarDialog extends DialogFragment {
         AppDatabase db = Room.databaseBuilder(App.getContext(),
                 AppDatabase.class, "vehicle").allowMainThreadQueries().build();
         db.vehicleDAO().insertAll(vehicle);
+        db.close();
         dataViewModel.getNewVehicle().setValue(vehicle);
     }
 }

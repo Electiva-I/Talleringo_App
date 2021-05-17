@@ -84,6 +84,7 @@ public class UpdateCardDialog  extends DialogFragment {
                 AppDatabase.class, "vehicle").allowMainThreadQueries().build();
 
         db.vehicleDAO().update(vehicle);
+        db.close();
         dataViewModel.getUpdatedVehicle().setValue(vehicle);
     }
 }

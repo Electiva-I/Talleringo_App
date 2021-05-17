@@ -72,12 +72,14 @@ public class UpdateMaintenanceDialog  extends DialogFragment {
 
 
         List<Vehicle> listVehicles = db.vehicleDAO().getAll();
+        db.close();
         ArrayAdapter<Vehicle> adapter = new ArrayAdapter<>(getContext(),
                 R.layout.spinner_item, listVehicles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerVehicle.setAdapter(adapter);
         int pos = listVehicles.indexOf(db.vehicleDAO().getVehicle(maintenance.Vehicle_Id));
+        db.close();
         spinnerVehicle.setSelection(pos);
 
         CallDateDialog();
@@ -129,6 +131,7 @@ public class UpdateMaintenanceDialog  extends DialogFragment {
             maintenance.Vehicle_Id = vehicle.ID;
 
             db.maintenanceDAO().update(maintenance);
+            db.close();
             dataViewModel.getUpdatedMaintenance().setValue(maintenance);
             Objects.requireNonNull(getDialog()).dismiss();
         });

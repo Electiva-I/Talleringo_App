@@ -46,5 +46,6 @@ public class HomeFragment extends Fragment {
         txtMaintenance.setText(db.maintenanceDAO().countMaintenance()+"");
         txtVehicles.setText(db.vehicleDAO().countVehicles()+"");
         txtHistory.setText(db.recordDAO().countHistory()+"");
+        db.close();
     }
 }

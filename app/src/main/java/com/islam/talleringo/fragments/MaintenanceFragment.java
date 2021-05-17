@@ -72,6 +72,7 @@ public class MaintenanceFragment extends Fragment {
         if (db.vehicleDAO().countVehicles() != 0) {
             initFragment();
         }
+        db.close();
 
     }
 
@@ -98,6 +99,7 @@ public class MaintenanceFragment extends Fragment {
 
         final Observer<Maintenance> createObserver = maintenance -> {
             maintenanceList.add(db.maintenanceDAO().getLastMaintenance());
+            db.close();
             maintenanceAdapter.notifyItemInserted(maintenanceAdapter.getItemCount());
             showMessage(R.string.txt_messages_maintenance_created);
         };
@@ -113,6 +115,7 @@ public class MaintenanceFragment extends Fragment {
             new AddMaintenanceDialog(dataViewModel).show(getFragmentManager(), "addMaintenance");
         });
         maintenanceList = db.maintenanceDAO().getAll();
+        db.close();
         maintenanceRV.setLayoutManager(layoutManager);
 
         maintenanceAdapter = new Maintenance_Adapter(maintenanceList, R.layout.card_view_maintenance, (id, position) -> detailMaintenance(id), (id, position, button) -> {
@@ -141,18 +144,21 @@ public class MaintenanceFragment extends Fragment {
             db.maintenanceDAO().deleteId(id);
             maintenanceList.remove(position);
             maintenanceAdapter.notifyItemRemoved(position);
+            db.close();
             showMessage(R.string.txt_messages_maintenance_deleted);
         }).setNegativeButton(R.string.btn_cancel, (dialog, which) -> dialog.cancel()).setTitle(R.string.txt_dialog_warning).show();
     }
 
     private void updateMaintenance(int id) {
         Maintenance maintenance = db.maintenanceDAO().getMaintenance(id);
+        db.close();
         assert getFragmentManager() != null;
         new UpdateMaintenanceDialog(updateDataViewModel, maintenance).show(getFragmentManager(), "addRecord");
     }
 
     private void detailMaintenance(int id) {
         Maintenance maintenance = db.maintenanceDAO().getMaintenance(id);
+        db.close();
         assert getFragmentManager() != null;
         new DetailMaintenanceDialog(deletedDataViewModel, maintenance).show(getFragmentManager(), "addRecord");
     }

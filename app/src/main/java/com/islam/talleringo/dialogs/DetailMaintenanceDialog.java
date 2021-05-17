@@ -54,6 +54,7 @@ public class DetailMaintenanceDialog extends DialogFragment {
     private void initDialog(View view){
         btn_add = view.findViewById(R.id.btn_add_vehicle);
         btn_cancel = view.findViewById(R.id.btn_cancel_vehicle);
+        btn_add.setVisibility(View.GONE);
         TextView txtVehicle = view.findViewById(R.id.vehicle_text);
         TextView txtDetail = view.findViewById(R.id.detail_text);
         TextView txtDate = view.findViewById(R.id.date_text);
@@ -68,9 +69,11 @@ public class DetailMaintenanceDialog extends DialogFragment {
 
         switchMaterial.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
+                btn_add.setVisibility(View.VISIBLE);
                 cost_container.setVisibility(View.VISIBLE);
             }else {
                 cost_container.setVisibility(View.GONE);
+                btn_add.setVisibility(View.GONE);
             }
         });
 

@@ -90,8 +90,7 @@
                 android:background="@color/white"
                 android:hint="@string/hint_date"
                 android:textStyle="bold"
-                android:padding="5dp"
-                app:drawableTopCompat="@drawable/calendar" />
+                android:padding="5dp" />
 
             <LinearLayout
                 android:layout_marginTop="20sp"

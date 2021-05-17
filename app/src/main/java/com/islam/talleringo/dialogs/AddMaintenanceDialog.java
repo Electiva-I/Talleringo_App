@@ -64,6 +64,7 @@ public class AddMaintenanceDialog extends DialogFragment {
         date = view.findViewById(R.id.date_text);
         ArrayAdapter<Vehicle> adapter = new ArrayAdapter<>(getContext(),
                 R.layout.spinner_item, db.vehicleDAO().getAll());
+        db.close();
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerVehicles.setAdapter(adapter);
@@ -113,6 +114,7 @@ public class AddMaintenanceDialog extends DialogFragment {
 
             Maintenance maintenance = new Maintenance(vehicle.ID, detail, creation_date, schedule_date );
             db.maintenanceDAO().insertAll(maintenance);
+            db.close();
             dataViewModel.getNewMaintenance().setValue(maintenance);
             Objects.requireNonNull(getDialog()).dismiss();
         });
