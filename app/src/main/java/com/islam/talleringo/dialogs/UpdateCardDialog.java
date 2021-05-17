@@ -70,6 +70,9 @@ public class UpdateCardDialog  extends DialogFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         btn_add.setOnClickListener(view -> {
+            if(!validatedFields()){
+                return;
+            }
             addVehicle(model.getText().toString(), brand.getText().toString(), year.getText().toString());
             Objects.requireNonNull(getDialog()).dismiss();
         });
@@ -86,5 +89,23 @@ public class UpdateCardDialog  extends DialogFragment {
         db.vehicleDAO().update(vehicle);
         db.close();
         dataViewModel.getUpdatedVehicle().setValue(vehicle);
+    }
+
+    private boolean validatedFields(){
+
+        if(brand.getText().toString().isEmpty()){
+            brand.setError("This field can not be blank");
+        }else{
+            if(model.getText().toString().isEmpty()){
+                model.setError("This field can not be blank");
+            }else{
+                if(year.getText().toString().isEmpty()){
+                    year.setError("This field can not be blank");
+                }else{
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
