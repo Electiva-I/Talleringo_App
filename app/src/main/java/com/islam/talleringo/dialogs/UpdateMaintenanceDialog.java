@@ -100,6 +100,7 @@ public class UpdateMaintenanceDialog  extends DialogFragment {
                     year,
                     month,
                     day);
+            txtDate.setError(null);
             datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             datePickerDialog.show();
         });
@@ -122,6 +123,9 @@ public class UpdateMaintenanceDialog  extends DialogFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         btn_add.setOnClickListener(view -> {
+            if(!validatedFields()){
+                return;
+            }
             Vehicle vehicle = (Vehicle) spinnerVehicle.getSelectedItem();
             String detail = txtDetail.getText().toString();
 
@@ -136,5 +140,19 @@ public class UpdateMaintenanceDialog  extends DialogFragment {
             Objects.requireNonNull(getDialog()).dismiss();
         });
         btn_cancel.setOnClickListener(view -> Objects.requireNonNull(getDialog()).cancel());
+    }
+
+    private boolean validatedFields(){
+
+        if(txtDetail.getText().toString().isEmpty()){
+            txtDetail.setError("This field can not be blank");
+        }else{
+            if(txtDate.getText().toString().isEmpty()){
+                txtDate.setError("This field can not be blank");
+            }else{
+                return true;
+            }
+        }
+        return false;
     }
 }
