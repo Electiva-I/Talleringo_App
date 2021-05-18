@@ -51,6 +51,7 @@ public class AddCarDialog extends DialogFragment {
         String [] vehicles_array = getResources().getStringArray(R.array.vehicles_array);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, vehicles_array);
         brand.setAdapter(adapter);
+        return;
     }
 
    @NonNull

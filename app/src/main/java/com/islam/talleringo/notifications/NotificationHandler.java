@@ -87,6 +87,7 @@ public class NotificationHandler extends ContextWrapper {
                     .setSmallIcon(android.R.drawable.stat_notify_chat)
                     .setAutoCancel(true)
                     .setContentIntent(pendingIntent)
+                    .setActions(action)
                     .setGroup(SUMMARY_GROUP_NAME);
         }
         return  null;
@@ -114,7 +115,7 @@ public class NotificationHandler extends ContextWrapper {
                                     .addLine("Alex Faarborg  Check this out")
                                     .addLine("Jeff Chang    Launch Party")
                                     .setBigContentTitle("2 new messages")
-                                    .setSummaryText("janedoe@example.com"))
+                                    .setSummaryText(getString(R.string.menu_maintenance)))
                             //specify which group this notification belongs to
                             .setGroup(SUMMARY_GROUP_NAME)
                             //set this notification as the summary for the group

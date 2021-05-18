@@ -80,7 +80,7 @@ public class AddRecordDialog extends DialogFragment {
 
         setListener = (datePicker, y, m, d) -> {
             month = m+1;
-            String date = day+"/"+month+"/"+year;
+            String date = month+"/"+day+"/"+year;
             txtDate.setText(date);
         };
         txtDate.setOnClickListener(view -> {

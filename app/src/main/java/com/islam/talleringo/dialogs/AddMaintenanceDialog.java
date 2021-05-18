@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.system.Os;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,7 +81,8 @@ public class AddMaintenanceDialog extends DialogFragment {
 
         setListener = (datePicker, y, m, d) -> {
             month = m+1;
-            String date = d+"/"+m+"/"+y;
+            String date = m+"/"+d+"/"+y;
+
             AddMaintenanceDialog.this.date.setText(date);
         };
         date.setOnClickListener(view -> {

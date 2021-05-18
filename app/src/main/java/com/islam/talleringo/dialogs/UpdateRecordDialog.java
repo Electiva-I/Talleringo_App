@@ -109,7 +109,7 @@ public class UpdateRecordDialog  extends DialogFragment {
 
         setListener = (datePicker, y, m, d) -> {
             month = m+1;
-            String date = d+"/"+m+"/"+y;
+            String date = m+"/"+d+"/"+y;
             txtDate.setText(date);
         };
 
