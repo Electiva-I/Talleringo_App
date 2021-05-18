@@ -144,11 +144,11 @@ public class UpdateMaintenanceDialog  extends DialogFragment {
 
     private boolean validatedFields(){
 
-        if(txtDetail.getText().toString().isEmpty()){
-            txtDetail.setError("This field can not be blank");
+        if(txtDetail.getText().toString().trim().isEmpty()){
+            txtDetail.setError(getString(R.string.validated_fields));
         }else{
-            if(txtDate.getText().toString().isEmpty()){
-                txtDate.setError("This field can not be blank");
+            if(txtDate.getText().toString().trim().isEmpty()){
+                txtDate.setError(getString(R.string.validated_fields));
             }else{
                 return true;
             }

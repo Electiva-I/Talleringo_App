@@ -83,6 +83,8 @@
     <string name="txt_messages_record_updated">Record updated!</string>
     <string name="txt_messages_record_deleted">Record Deleted!</string>
 
+    <string name="validated_fields">¡This field can not be blank!</string>
+
     <string name = "txt_dialog_delete"> Keep in mind that if you delete a vehicle you will also delete the data that depends on it </string>
     <string name = "txt_dialog_warning">Warning</string>
 

@@ -108,8 +108,8 @@ public class DetailMaintenanceDialog extends DialogFragment {
 
     private boolean validatedFields(){
 
-        if(txt_cost.getText().toString().isEmpty()){
-            txt_cost.setError("This field can not be blank");
+        if(txt_cost.getText().toString().trim().isEmpty()){
+            txt_cost.setError(getString(R.string.validated_fields));
         }else{
             return true;
         }
