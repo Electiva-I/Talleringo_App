@@ -64,8 +64,12 @@ public class AddCarDialog extends DialogFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         btn_add.setOnClickListener(view -> {
+            if(!validatedFields()) {
+                return;
+            }
             addVehicle(model.getText().toString(), brand.getText().toString(), year.getText().toString());
             Objects.requireNonNull(getDialog()).dismiss();
+
         });
         btn_cancel.setOnClickListener(view -> Objects.requireNonNull(getDialog()).cancel());
     }
@@ -77,5 +81,23 @@ public class AddCarDialog extends DialogFragment {
         db.vehicleDAO().insertAll(vehicle);
         db.close();
         dataViewModel.getNewVehicle().setValue(vehicle);
+    }
+
+    private boolean validatedFields(){
+
+        if(brand.getText().toString().isEmpty()){
+            brand.setError("This field can not be blank");
+        }else{
+            if(model.getText().toString().isEmpty()){
+                model.setError("This field can not be blank");
+            }else{
+                if(year.getText().toString().isEmpty()){
+                    year.setError("This field can not be blank");
+                }else{
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

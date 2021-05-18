@@ -89,7 +89,9 @@ public class DetailMaintenanceDialog extends DialogFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         btn_add.setOnClickListener(view -> {
-
+            if(!validatedFields()){
+                return;
+            }
             float cost = Float.parseFloat(txt_cost.getText().toString());
             Calendar calendar = Calendar.getInstance();
             year = calendar.get(Calendar.YEAR);
@@ -103,4 +105,15 @@ public class DetailMaintenanceDialog extends DialogFragment {
         });
         btn_cancel.setOnClickListener(view -> Objects.requireNonNull(getDialog()).cancel());
     }
+
+    private boolean validatedFields(){
+
+        if(txt_cost.getText().toString().isEmpty()){
+            txt_cost.setError("This field can not be blank");
+        }else{
+            return true;
+        }
+        return false;
+    }
+
 }

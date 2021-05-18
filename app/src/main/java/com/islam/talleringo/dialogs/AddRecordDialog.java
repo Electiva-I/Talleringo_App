@@ -91,6 +91,7 @@ public class AddRecordDialog extends DialogFragment {
                     year,
                     month,
                     day);
+            txtDate.setError(null);
             datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             datePickerDialog.show();
         });
@@ -107,6 +108,9 @@ public class AddRecordDialog extends DialogFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         btn_add.setOnClickListener(view -> {
+            if(!validatedFields()){
+                return;
+            }
             Vehicle vehicle = (Vehicle) spinnerVehicle.getSelectedItem();
             String detail = txtDetail.getText().toString();
             String creation_date = txtDate.getText().toString();
@@ -119,6 +123,24 @@ public class AddRecordDialog extends DialogFragment {
             Objects.requireNonNull(getDialog()).dismiss();
         });
         btn_cancel.setOnClickListener(view -> Objects.requireNonNull(getDialog()).cancel());
+    }
+
+    private boolean validatedFields(){
+
+        if(txtDetail.getText().toString().isEmpty()){
+            txtDetail.setError("This field can not be blank");
+        }else{
+            if(txtCost.getText().toString().isEmpty()){
+                txtCost.setError("This field can not be blank");
+            }else{
+                if(txtDate.getText().toString().isEmpty()){
+                    txtDate.setError("This field can not be blank");
+                }else{
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }
