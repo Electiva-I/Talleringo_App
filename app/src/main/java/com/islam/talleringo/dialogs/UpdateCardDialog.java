@@ -93,14 +93,14 @@ public class UpdateCardDialog  extends DialogFragment {
 
     private boolean validatedFields(){
 
-        if(brand.getText().toString().isEmpty()){
-            brand.setError("This field can not be blank");
+        if(brand.getText().toString().trim().isEmpty()){
+            brand.setError(getString(R.string.validated_fields));
         }else{
-            if(model.getText().toString().isEmpty()){
-                model.setError("This field can not be blank");
+            if(model.getText().toString().trim().isEmpty()){
+                model.setError(getString(R.string.validated_fields));
             }else{
-                if(year.getText().toString().isEmpty()){
-                    year.setError("This field can not be blank");
+                if(year.getText().toString().trim().isEmpty()){
+                    year.setError(getString(R.string.validated_fields));
                 }else{
                     return true;
                 }

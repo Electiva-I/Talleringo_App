@@ -80,6 +80,8 @@
     <string name="txt_messages_record_updated">¡Registro actualizado!</string>
     <string name="txt_messages_record_deleted">¡Registro Eliminado!</string>
 
+    <string name="validated_fields">¡Este campo no puede ir vacio!</string>
+
 
 
 

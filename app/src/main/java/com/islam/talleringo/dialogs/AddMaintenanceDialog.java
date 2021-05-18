@@ -127,11 +127,11 @@ public class AddMaintenanceDialog extends DialogFragment {
 
     private boolean validatedFields(){
 
-        if(detail.getText().toString().isEmpty()){
-            detail.setError("This field can not be blank");
+        if(detail.getText().toString().trim().isEmpty()){
+            detail.setError(getString(R.string.validated_fields));
         }else{
-            if(date.getText().toString().isEmpty()){
-                date.setError("This field can not be blank");
+            if(date.getText().toString().trim().isEmpty()){
+                date.setError(getString(R.string.validated_fields));
             }else{
                 return true;
             }
