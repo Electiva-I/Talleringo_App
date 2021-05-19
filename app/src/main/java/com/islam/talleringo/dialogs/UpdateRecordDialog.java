@@ -103,12 +103,13 @@ public class UpdateRecordDialog  extends DialogFragment {
                     year,
                     month,
                     day);
+            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()-1000);
             datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             datePickerDialog.show();
         });
 
         setListener = (datePicker, y, m, d) -> {
-            month = m+1;
+            m++;
             String date = m+"/"+d+"/"+y;
             txtDate.setText(date);
         };

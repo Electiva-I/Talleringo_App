@@ -36,7 +36,6 @@ public class About_Adapter  extends RecyclerView.Adapter<About_Adapter.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d("DeBUG", position+"");
         holder.bind(develops.get(position).Name,
                 develops.get(position).Username,
                 develops.get(position).Image,

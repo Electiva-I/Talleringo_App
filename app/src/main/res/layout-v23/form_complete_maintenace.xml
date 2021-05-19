@@ -98,12 +98,11 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:lines="2"
-                        android:layout_marginLeft="25dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="25dp"
                         android:textColor="@color/white"
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        android:padding="5dp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -163,20 +162,7 @@
                 android:paddingEnd="15dp"
                 android:paddingStart="0dp"
                 android:layout_height="wrap_content">
-                <Button
-                    android:id="@+id/btn_add_vehicle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:padding="10dp"
-                    android:text="@string/btn_save"
-                    android:background="#00FF0000"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:textAlignment="center"
-                    tools:ignore="ButtonStyle,UnusedAttribute" />
+
                 <Button
                     android:id="@+id/btn_cancel_vehicle"
                     android:layout_width="wrap_content"
@@ -190,6 +176,20 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:background="#00FF0000"
+                    tools:ignore="ButtonStyle,UnusedAttribute" />
+                <Button
+                    android:id="@+id/btn_add_vehicle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:padding="10dp"
+                    android:text="@string/btn_save"
+                    android:background="#00FF0000"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textAlignment="center"
                     tools:ignore="ButtonStyle,UnusedAttribute" />
             </LinearLayout>
 

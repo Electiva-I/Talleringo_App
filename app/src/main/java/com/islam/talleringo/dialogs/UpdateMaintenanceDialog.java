@@ -2,15 +2,19 @@ package com.islam.talleringo.dialogs;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -29,16 +33,19 @@ import com.islam.talleringo.utils.App;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class UpdateMaintenanceDialog  extends DialogFragment {
 
     private Button btn_add, btn_cancel;
     private Spinner spinnerVehicle;
     private EditText txtDetail;
-    private TextView txtDate;
+    private TextView txtDate, txtHour;
     private int year, month, day;
     private final Maintenance maintenance;
     private final DataViewModel dataViewModel;
+    private CheckBox checkBoxNotification;
+    private LinearLayout linearLayoutNotification;
 
     AppDatabase db = Room.databaseBuilder(App.getContext(),
             AppDatabase.class, "vehicle").allowMainThreadQueries().build();
@@ -66,9 +73,22 @@ public class UpdateMaintenanceDialog  extends DialogFragment {
         txtDetail = view.findViewById(R.id.detail_text);
         txtDate = view.findViewById(R.id.date_text);
 
+        txtHour = view.findViewById(R.id.txt_maintenance_notification_hour);
+        checkBoxNotification = view.findViewById(R.id.checkboxNotification);
+        linearLayoutNotification = view.findViewById(R.id.linearNotificationLayout);
+
 
         txtDetail.setText(maintenance.Detail);
         txtDate.setText(maintenance.Schedule_Date);
+
+        checkBoxNotification.setChecked( maintenance.notify);
+
+        if (maintenance.notify){
+            txtHour.setText(maintenance.hour);
+            linearLayoutNotification.setVisibility(View.VISIBLE);
+        }
+
+
 
 
         List<Vehicle> listVehicles = db.vehicleDAO().getAll();
@@ -83,6 +103,35 @@ public class UpdateMaintenanceDialog  extends DialogFragment {
         spinnerVehicle.setSelection(pos);
 
         CallDateDialog();
+
+        txtHour.setOnClickListener(view1 -> {
+            AtomicInteger hour = new AtomicInteger();
+            AtomicInteger minute = new AtomicInteger();
+            Calendar calendar = Calendar.getInstance();
+            TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), (timePicker, hourT, minuteT) -> {
+                hour.set(hourT);
+                minute.set(minuteT);
+                calendar.set(0, 0, 0, hourT, minuteT);
+                txtHour.setText(DateFormat.format("HH:mm",calendar));
+                txtHour.setError(null);
+
+            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)+30, false);
+
+            timePickerDialog.updateTime(hour.get(), minute.get());
+            timePickerDialog.show();
+        });
+
+
+        checkBoxNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkBoxNotification.isChecked()) {
+                    linearLayoutNotification.setVisibility(View.VISIBLE);
+                } else {
+                    linearLayoutNotification.setVisibility(View.GONE);
+                }
+            }
+        });
 
     }
 
@@ -101,12 +150,13 @@ public class UpdateMaintenanceDialog  extends DialogFragment {
                     month,
                     day);
             txtDate.setError(null);
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
             datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             datePickerDialog.show();
         });
 
         setListener = (datePicker, y, m, d) -> {
-            month = m+1;
+            m++;
             String date = m+"/"+d+"/"+y;
             txtDate.setText(date);
         };
@@ -133,6 +183,8 @@ public class UpdateMaintenanceDialog  extends DialogFragment {
             maintenance.Schedule_Date = txtDate.getText().toString();
             maintenance.Detail = detail;
             maintenance.Vehicle_Id = vehicle.ID;
+            maintenance.notify = checkBoxNotification.isChecked();
+            maintenance.hour = txtHour.getText().toString();
 
             db.maintenanceDAO().update(maintenance);
             db.close();
@@ -146,12 +198,12 @@ public class UpdateMaintenanceDialog  extends DialogFragment {
 
         if(txtDetail.getText().toString().trim().isEmpty()){
             txtDetail.setError(getString(R.string.validated_fields));
-        }else{
-            if(txtDate.getText().toString().trim().isEmpty()){
+        }else if(txtDate.getText().toString().trim().isEmpty()){
                 txtDate.setError(getString(R.string.validated_fields));
-            }else{
-                return true;
-            }
+        } else if (checkBoxNotification.isChecked() && txtHour.getText().toString().trim().isEmpty()){
+            txtHour.setError(getString(R.string.validated_fields));
+        } else {
+            return true;
         }
         return false;
     }

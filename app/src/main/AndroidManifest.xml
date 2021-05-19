@@ -58,6 +58,8 @@
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.MainActivity" />
 
+        <service android:name=".notifications.NotificationActionService"/>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

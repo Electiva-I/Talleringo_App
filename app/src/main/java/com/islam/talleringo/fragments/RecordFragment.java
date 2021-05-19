@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,6 +45,7 @@ public class RecordFragment extends Fragment {
     private Record_Adapter recordAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Record> recordList;
+    private LinearLayout linearLayoutInfoVehicles;
 
 
     public RecordFragment() {
@@ -59,8 +61,19 @@ public class RecordFragment extends Fragment {
         fabAddRecord = view.findViewById(R.id.fabAddRecord);
         recordRV = view.findViewById(R.id.recyclerViewRecord);
         layoutManager = new LinearLayoutManager(getActivity());
-        initRecord();
+        linearLayoutInfoVehicles = view.findViewById(R.id.layoutInfoNoVehicles);
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (db.vehicleDAO().countVehicles() != 0) {
+            linearLayoutInfoVehicles.setVisibility(View.GONE);
+            initRecord();
+        } else {
+            fabAddRecord.setEnabled(false);
+        }
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -71,7 +84,6 @@ public class RecordFragment extends Fragment {
         });
 
         recordList = db.recordDAO().getAll();
-        db.close();
         recordRV.setLayoutManager(layoutManager);
         recordAdapter = new Record_Adapter(recordList, R.layout.card_view_record, (id, position) -> {
 
@@ -100,7 +112,6 @@ public class RecordFragment extends Fragment {
         builder.setMessage(R.string.txt_dialog_delete).setPositiveButton(R.string.menu_delete, (dialog, which) -> {
             int[] ids = {id};
             db.recordDAO().deleteId(ids);
-            db.close();
             recordList.remove(position);
             recordAdapter.notifyItemRemoved(position);
             showMessage(R.string.txt_messages_record_deleted);
@@ -109,7 +120,6 @@ public class RecordFragment extends Fragment {
 
     private void updateRecord(int id) {
         Record record = db.recordDAO().getRecord(id);
-        db.close();
         assert getFragmentManager() != null;
         new UpdateRecordDialog(updateDataViewModel, record).show(getFragmentManager(), "addRecord");
     }
@@ -129,7 +139,6 @@ public class RecordFragment extends Fragment {
 
         final Observer<Record> createdObserver = record -> {
             recordList.add(db.recordDAO().getLastRecord());
-            db.close();
             recordAdapter.notifyItemInserted(recordAdapter.getItemCount());
             showMessage(R.string.txt_messages_record_created);
         };

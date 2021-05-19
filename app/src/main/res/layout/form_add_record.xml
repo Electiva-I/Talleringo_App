@@ -123,20 +123,7 @@
         android:paddingEnd="15dp"
         android:paddingStart="0dp"
         android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btn_add_vehicle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:padding="10dp"
-            android:text="@string/btn_add"
-            android:background="#00FF0000"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:textAlignment="center"
-            tools:ignore="ButtonStyle,UnusedAttribute" />
+
         <Button
             android:id="@+id/btn_cancel_vehicle"
             android:layout_width="wrap_content"
@@ -150,6 +137,20 @@
             android:clickable="true"
             android:focusable="true"
             android:background="#00FF0000"
+            tools:ignore="ButtonStyle,UnusedAttribute" />
+        <Button
+            android:id="@+id/btn_add_vehicle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:padding="10dp"
+            android:text="@string/btn_add"
+            android:background="#00FF0000"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:textAlignment="center"
             tools:ignore="ButtonStyle,UnusedAttribute" />
     </LinearLayout>
 </LinearLayout>

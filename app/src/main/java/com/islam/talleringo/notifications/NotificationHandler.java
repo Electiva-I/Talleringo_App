@@ -4,16 +4,16 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.RemoteInput;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.os.Build;
-
 import androidx.core.app.NotificationCompat;
-
 import com.islam.talleringo.R;
 import com.islam.talleringo.activities.MainActivity;
+
 
 public class NotificationHandler extends ContextWrapper {
     private NotificationManager notificationManager;
@@ -55,31 +55,52 @@ public class NotificationHandler extends ContextWrapper {
         return notificationManager;
     }
 
-    public Notification.Builder createNotificationBuilder(String title, String message, boolean isHigh){
+    public Notification.Builder createNotificationBuilder(int notification_id,int maintenance_id, String title, String message, boolean isHigh){
         if (Build.VERSION.SDK_INT >= 26) {
             if (isHigh) {
-                return  this.createNotificationWithChannel(title, message, CHANNEL_HIGH_ID);
+                return  this.createNotificationWithChannel(notification_id, maintenance_id, title, message, CHANNEL_HIGH_ID);
             }
-            return  this.createNotificationWithChannel(title, message, CHANNEL_LOW_ID);
+            return  this.createNotificationWithChannel(notification_id, maintenance_id, title, message, CHANNEL_LOW_ID);
         }
         return this.createNotificationWithoutChannel(title, message);
     }
 
-    private Notification.Builder createNotificationWithChannel(String title, String message, String channelId){
+    private Notification.Builder createNotificationWithChannel(int notification_id, int maintenance_id,String title, String message, String channelId){
         if (Build.VERSION.SDK_INT  >= Build.VERSION_CODES.O){
+            RemoteInput remoteInput = new RemoteInput.Builder("ASD")
+                    .setLabel(getString(R.string.txt_notifications_cost_text))
+
+                    .build();
+
+            Intent intentDone = new Intent(this, NotificationActionService.class);
+            intentDone.putExtra("notification_id", notification_id);
+            intentDone.putExtra("maintenance_id",maintenance_id);
+            intentDone.putExtra("type",0);
+
+            Intent intentSkip = new Intent(this, NotificationActionService.class);
+            intentSkip.putExtra("notification_id", notification_id);
+            intentSkip.putExtra("maintenance_id",maintenance_id);
+            intentSkip.putExtra("type",1);
 
             Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("toMaintenance", true);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
-            Notification.Action action = new Notification.Action.Builder(
-                    Icon.createWithResource( this,android.R.drawable.ic_menu_save),
-                    "Mark as Completed", pendingIntent).build();
+            PendingIntent pendingIntentDone = PendingIntent.getService(this, 0, intentDone,  PendingIntent.FLAG_ONE_SHOT);
+            PendingIntent pendingIntentSkip = PendingIntent.getService(this, 0, intentSkip,  PendingIntent.FLAG_ONE_SHOT);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0 );
+
+            Notification.Action actionDone = new Notification.Action.Builder(
+                    Icon.createWithResource( this,
+                            android.R.drawable.ic_menu_save),
+                            getString(R.string.txt_notifications_action_completed),
+                    pendingIntentDone)
+                    .addRemoteInput(remoteInput)
+                    .build();
 
             Notification.Action actionSkip = new Notification.Action.Builder(
-                    Icon.createWithResource( this,android.R.drawable.ic_menu_save),
-                    "Skip", pendingIntent).build();
+                    Icon.createWithResource( this,
+                            android.R.drawable.ic_menu_save),
+                            getString(R.string.txt_notifications_action_hold_over),
+                            pendingIntentSkip).build();
 
             return new Notification.Builder(getApplicationContext(), channelId)
                     .setContentTitle(title)
@@ -87,7 +108,7 @@ public class NotificationHandler extends ContextWrapper {
                     .setSmallIcon(android.R.drawable.stat_notify_chat)
                     .setAutoCancel(true)
                     .setContentIntent(pendingIntent)
-                    .setActions(action)
+                    .setActions(actionDone,actionSkip)
                     .setGroup(SUMMARY_GROUP_NAME);
         }
         return  null;
@@ -106,15 +127,13 @@ public class NotificationHandler extends ContextWrapper {
             String channelId = isHigh ?  CHANNEL_HIGH_ID : CHANNEL_LOW_ID;
             Notification summaryNotification =
                     new NotificationCompat.Builder(this, channelId)
-                            .setContentTitle("ALGO")
+                            .setContentTitle(getString(R.string.app_name))
                             //set content text to support devices running API level < 24
-                            .setContentText("Two new messages")
+                            .setContentText(getString(R.string.txt_notifications_summary_content))
                             .setSmallIcon(R.drawable.com_facebook_button_like_icon_selected)
                             //build summary info into InboxStyle template
                             .setStyle(new NotificationCompat.InboxStyle()
-                                    .addLine("Alex Faarborg  Check this out")
-                                    .addLine("Jeff Chang    Launch Party")
-                                    .setBigContentTitle("2 new messages")
+                                    .setBigContentTitle(getString(R.string.txt_notifications_summary_content_title))
                                     .setSummaryText(getString(R.string.menu_maintenance)))
                             //specify which group this notification belongs to
                             .setGroup(SUMMARY_GROUP_NAME)

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
+import androidx.work.Data;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
@@ -28,6 +30,7 @@ import com.islam.talleringo.database.Maintenances.Maintenance;
 import com.islam.talleringo.dialogs.AddMaintenanceDialog;
 import com.islam.talleringo.dialogs.DetailMaintenanceDialog;
 import com.islam.talleringo.dialogs.UpdateMaintenanceDialog;
+import com.islam.talleringo.schedulers.Scheduler;
 import com.islam.talleringo.utils.App;
 
 import java.util.List;
@@ -44,6 +47,7 @@ public class MaintenanceFragment extends Fragment {
     private Maintenance_Adapter maintenanceAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Maintenance> maintenanceList;
+    private LinearLayout linearLayoutInfoVehicles;
 
     public MaintenanceFragment() {
     }
@@ -61,6 +65,7 @@ public class MaintenanceFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_maintenance, container, false);
         floatingActionButton = view.findViewById(R.id.fabAddMaintenance);
         maintenanceRV = view.findViewById(R.id.recyclerViewMaintenance);
+        linearLayoutInfoVehicles = view.findViewById(R.id.layoutInfoNoVehicles);
         layoutManager = new LinearLayoutManager(getActivity());
         return view;
     }
@@ -70,10 +75,11 @@ public class MaintenanceFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (db.vehicleDAO().countVehicles() != 0) {
+            linearLayoutInfoVehicles.setVisibility(View.GONE);
             initFragment();
+        } else {
+            floatingActionButton.setEnabled(false);
         }
-        db.close();
-
     }
 
     @Override
@@ -88,18 +94,40 @@ public class MaintenanceFragment extends Fragment {
             int position = maintenanceList.indexOf(maintenance);
             maintenanceList.set(position, maintenance);
             maintenanceAdapter.notifyDataSetChanged();
+            Scheduler.getInstance().cancelAllWorkByTag(maintenance.uuid);
+            if (maintenance.notify){
+                Scheduler.Schedule_Maintenance(maintenance.Schedule_Date+" "+ maintenance.hour, maintenance.uuid,
+                        new Data.Builder()
+                                .putString("title", getString(R.string.txt_notifications_title))
+                                .putString("detail", maintenance.Detail)
+                                .putInt("maintenance_id", maintenance.ID)
+                                .build()
+                );
+            }
+
             showMessage(R.string.txt_messages_maintenance_updated);
         };
 
         final Observer<Maintenance> deleteObserver = maintenance -> {
             maintenanceList.remove(maintenance);
             maintenanceAdapter.notifyDataSetChanged();
+            Scheduler.getInstance().cancelAllWorkByTag(maintenance.uuid);
             showMessage(R.string.txt_messages_maintenance_transferred);
         };
 
         final Observer<Maintenance> createObserver = maintenance -> {
-            maintenanceList.add(db.maintenanceDAO().getLastMaintenance());
-            db.close();
+            Maintenance newMaintenance =db.maintenanceDAO().getLastMaintenance();
+            maintenanceList.add(newMaintenance);
+            if (newMaintenance.notify){
+                Scheduler.Schedule_Maintenance(newMaintenance.Schedule_Date+" "+ newMaintenance.hour, newMaintenance.uuid,
+                        new Data.Builder()
+                                .putString("title", getString(R.string.txt_notifications_title))
+                                .putString("detail", newMaintenance.Detail)
+                                .putInt("maintenance_id", newMaintenance.ID)
+                                .build()
+                );
+            }
+
             maintenanceAdapter.notifyItemInserted(maintenanceAdapter.getItemCount());
             showMessage(R.string.txt_messages_maintenance_created);
         };
@@ -115,10 +143,10 @@ public class MaintenanceFragment extends Fragment {
             new AddMaintenanceDialog(dataViewModel).show(getFragmentManager(), "addMaintenance");
         });
         maintenanceList = db.maintenanceDAO().getAll();
-        db.close();
+
         maintenanceRV.setLayoutManager(layoutManager);
 
-        maintenanceAdapter = new Maintenance_Adapter(maintenanceList, R.layout.card_view_maintenance, (id, position) -> detailMaintenance(id), (id, position, button) -> {
+        maintenanceAdapter = new Maintenance_Adapter(maintenanceList, R.layout.card_view_maintenance, (id, position) -> detailMaintenance(id, position), (id, position, button) -> {
             PopupMenu popup = new PopupMenu(Objects.requireNonNull(getContext()), button);
             popup.getMenuInflater().inflate(R.menu.vehicle_menu, popup.getMenu());
 
@@ -128,7 +156,7 @@ public class MaintenanceFragment extends Fragment {
                         deleteMaintenance(id, position, db);
                         break;
                     case R.id.vehicle_menu_update:
-                        updateMaintenance(id);
+                        updateMaintenance(id, position);
                         break;
                 }
                 return false;
@@ -139,26 +167,43 @@ public class MaintenanceFragment extends Fragment {
     }
 
     private void deleteMaintenance(int id, int position, AppDatabase db) {
+        if (db.maintenanceDAO().getMaintenance(id) == null){
+            maintenanceList.remove(position);
+            maintenanceAdapter.notifyItemRemoved(position);
+            showMessage(R.string.txt_messages_maintenance_transferred);
+            return;
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(R.string.txt_dialog_delete).setPositiveButton(R.string.menu_delete, (dialog, which) -> {
+
+            Scheduler.getInstance().cancelAllWorkByTag(db.maintenanceDAO().getMaintenance(id).uuid);
             db.maintenanceDAO().deleteId(id);
             maintenanceList.remove(position);
             maintenanceAdapter.notifyItemRemoved(position);
-            db.close();
             showMessage(R.string.txt_messages_maintenance_deleted);
         }).setNegativeButton(R.string.btn_cancel, (dialog, which) -> dialog.cancel()).setTitle(R.string.txt_dialog_warning).show();
     }
 
-    private void updateMaintenance(int id) {
+    private void updateMaintenance(int id, int position) {
+        if (db.maintenanceDAO().getMaintenance(id) == null){
+            maintenanceList.remove(position);
+            maintenanceAdapter.notifyItemRemoved(position);
+            showMessage(R.string.txt_messages_maintenance_transferred);
+            return;
+        }
         Maintenance maintenance = db.maintenanceDAO().getMaintenance(id);
-        db.close();
         assert getFragmentManager() != null;
         new UpdateMaintenanceDialog(updateDataViewModel, maintenance).show(getFragmentManager(), "addRecord");
     }
 
-    private void detailMaintenance(int id) {
+    private void detailMaintenance(int id, int position) {
+        if (db.maintenanceDAO().getMaintenance(id) == null){
+            maintenanceList.remove(position);
+            maintenanceAdapter.notifyItemRemoved(position);
+            showMessage(R.string.txt_messages_maintenance_transferred);
+            return;
+        }
         Maintenance maintenance = db.maintenanceDAO().getMaintenance(id);
-        db.close();
         assert getFragmentManager() != null;
         new DetailMaintenanceDialog(deletedDataViewModel, maintenance).show(getFragmentManager(), "addRecord");
     }

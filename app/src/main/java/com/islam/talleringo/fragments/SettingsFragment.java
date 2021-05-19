@@ -12,16 +12,13 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.work.Data;
-import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.islam.talleringo.R;
-import com.islam.talleringo.alarm.SchedulerWorker;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 public class SettingsFragment extends Fragment {
 
@@ -70,7 +67,7 @@ public class SettingsFragment extends Fragment {
         Log.d("alertTIme", "SYSTEM "+System.currentTimeMillis()+" "+ new Date());
 
 
-        //WorkManager.getInstance(getContext()).cancelAllWork();
+        WorkManager.getInstance(getContext()).cancelAllWork();
         //WorkManager.getInstance(getContext()).cancelAllWorkByTag("tag");
     }
 

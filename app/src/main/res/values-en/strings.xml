@@ -36,6 +36,7 @@
     <string name="add_maintenance_detalle">Detail:</string>
     <string name="add_maintenance_cost">Cost:</string>
     <string name="add_maintenance_fechaprog">Scheduled date:</string>
+    <string name="add_maintenance_notification">Notify me</string>
 
     <string name="title_add_record">Add Record</string>
     <string name="add_record_date_completed">Date:</string>
@@ -83,7 +84,7 @@
     <string name="txt_messages_record_updated">Record updated!</string>
     <string name="txt_messages_record_deleted">Record Deleted!</string>
 
-    <string name="validated_fields">¡This field can not be blank!</string>
+    <string name="validated_fields">This field can not be blank!</string>
 
     <string name = "txt_dialog_delete"> Keep in mind that if you delete a vehicle you will also delete the data that depends on it </string>
     <string name = "txt_dialog_warning">Warning</string>
@@ -91,14 +92,25 @@
     <string name = "txt_dialog_completed_maintenance">Maintenance Performed</string>
     <string name = "title_dialog_completed_maintenance">Maintenance Detail</string>
 
-    <string name = "txt_card_maintenance_detail">Hola mundo  otra cosa Hola mundo  otra cosa Hola mundo  otra cosa Hola mundo  otra cosa</string>
+    <string name = "txt_card_maintenance_detail">Text Test</string>
+
+    <string name = "txt_notifications_summary_content">Two new notifications</string>
+    <string name = "txt_notifications_summary_content_title">Completed maintenance</string>
+    <string name = "txt_notifications_action_hold_over">Hold over</string>
+    <string name = "txt_notifications_action_completed">Completed</string>
+    <string name = "txt_notifications_title">New maintenance</string>
+    <string name = "txt_notifications_cost_text">Enter the cost</string>
+
     <string name="txt_record_cost">$33.50</string>
     <string name="txt_dollar_char">$</string>
 
+    <string name="txt_info_no_vehicles">No vehicles yet!</string>
+
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="preference_file_key">com.islam.talleringo.PREFERENCE_FILE_KEY</string>
 
+    <string name="preference_file_key">com.islam.talleringo.PREFERENCE_FILE_KEY</string>
     <string name="facebook_app_id">286245596344245</string>
     <string name="fb_login_protocol_scheme">fb286245596344245</string>
+    <string name="db_name">vehicle</string>
 </resources>

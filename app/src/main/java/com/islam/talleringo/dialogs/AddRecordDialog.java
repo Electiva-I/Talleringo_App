@@ -6,12 +6,15 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -35,6 +38,7 @@ public class AddRecordDialog extends DialogFragment {
     private Button btn_add, btn_cancel;
     private Spinner spinnerVehicle;
     private EditText  txtDetail, txtCost;
+
     private TextView txtDate;
     private int year, month, day;
     private final DataViewModel dataViewModel;
@@ -62,10 +66,16 @@ public class AddRecordDialog extends DialogFragment {
         txtDetail = view.findViewById(R.id.detail_text);
         txtDate = view.findViewById(R.id.date_text);
         txtCost = view.findViewById(R.id.cost_text);
-        ArrayAdapter<Vehicle> adapter = new ArrayAdapter<>(getContext(),
-                R.layout.spinner_item, db.vehicleDAO().getAll());
-        db.close();
+
+
+        ArrayAdapter<Vehicle> adapter = new ArrayAdapter<>(
+                getContext(),
+                R.layout.spinner_item,
+                db.vehicleDAO().getAll());
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
 
         spinnerVehicle.setAdapter(adapter);
         CallDateDialog();
@@ -79,8 +89,8 @@ public class AddRecordDialog extends DialogFragment {
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
         setListener = (datePicker, y, m, d) -> {
-            month = m+1;
-            String date = month+"/"+day+"/"+year;
+           m++;
+            String date = m+"/"+d+"/"+y;
             txtDate.setText(date);
         };
         txtDate.setOnClickListener(view -> {
@@ -92,6 +102,7 @@ public class AddRecordDialog extends DialogFragment {
                     month,
                     day);
             txtDate.setError(null);
+            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()-1000);
             datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             datePickerDialog.show();
         });

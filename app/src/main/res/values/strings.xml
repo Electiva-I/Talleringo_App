@@ -1,90 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Talleringo</string>
 
     <string name="app_group">Trust Technology</string>
-    <string name="menu_sign_out">Cerrar Sesión</string>
-    <string name="menu_about">Acerca de</string>
-    <string name="menu_home">Inicio</string>
-    <string name="menu_vehicles">Vehiculos</string>
-    <string name="menu_maintenance">Mantenimientos</string>
-    <string name="menu_settings">Configuraciones</string>
-    <string name="menu_record">Historial</string>
+    <string name="app_name">Talleringo</string>
+    <string name="menu_sign_out">Logout</string>
+    <string name="menu_about">About</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_vehicles">Vehicles</string>
+    <string name="menu_maintenance">Maintenance</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_record">Record</string>
 
-    <string name="menu_delete">Eliminar</string>
-    <string name="menu_update">Actualizar</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_update">Update</string>
 
     <string name="header_title">Talleringo App</string>
-    <string name="header_text">Usuario</string>
+    <string name="header_text">User</string>
 
-    <string name="signIn_text">Iniciar Sesión</string>
-    <string name="btn_continue_without_account">Continuar sin cuenta</string>
+    <string name="signIn_text">Sign in</string>
+    <string name="btn_continue_without_account">Continue without account</string>
 
-    <string name="label_text_vehicle">Listado de Vehiculos</string>
-    <string name="label_text_maintenance">Listado de Mantenimientos</string>
+    <string name="label_text_vehicle">Vehicle List</string>
+    <string name="label_text_maintenance">Maintenance List</string>
 
-    <string name="title_add_vehicle">Agregar Vehiculo</string>
+    <string name="title_add_vehicle">Add Vehicle</string>
+    <string name="add_vehicle_marca">Brand:</string>
+    <string name="add_vehicle_modelo">Model:</string>
+    <string name="add_vehicle_anio">Year:</string>
+    <string name="add_vehicle_image">Image:</string>
 
-    <string name="title_update_dialog">Actualizar</string>
+    <string name="title_update_dialog">Update</string>
 
-    <string name = "txt_dialog_completed_maintenance">Mantenimiento Realizado</string>
-    <string name = "title_dialog_completed_maintenance">Detalle de Mantenimiento</string>
+    <string name="title_add_maintenance">Add Maintenance</string>
+    <string name="add_maintenance_vehiculo">Vehicle:</string>
+    <string name="add_maintenance_detalle">Detail:</string>
+    <string name="add_maintenance_cost">Cost:</string>
+    <string name="add_maintenance_fechaprog">Scheduled date:</string>
+    <string name="add_maintenance_notification">Notify me</string>
 
 
-    <string name="add_vehicle_marca">Marca:</string>
-    <string name="add_vehicle_modelo">Modelo:</string>
-    <string name="add_vehicle_anio">Año:</string>
-    <string name="add_vehicle_image">Imagen:</string>s
+    <string name="title_add_record">Add Record</string>
+    <string name="add_record_date_completed">Date:</string>
+    <string name="hint_date">Select the date</string>
 
-    <string name="title_add_maintenance">Agregar Mantenimiento</string>
-    <string name="add_maintenance_vehiculo">Vehiculo:</string>
-    <string name="add_maintenance_detalle">Detalle:</string>
-    <string name="add_maintenance_cost">Costo:</string>
-    <string name="add_maintenance_fechaprog">Fecha programada:</string>
-
-    <string name="title_add_record">Agregar Historial</string>
-    <string name="add_record_date_completed">Fecha:</string>
-
-    <string name="hint_date">Seleccione la fecha</string>
-
-    <string name="add_settings_sincronizar">Sincronizar:</string>
-    <string name="add_settings_hora">Hora de sincronizacion:</string>
-    <string name="add_settings_cheboxLeyend">Desea recibir notificaciones de la aplicación.</string>
-    <string name="add_settings_rbtn_yes">SI</string>
+    <string name="add_settings_sincronizar">Sync up:</string>
+    <string name="add_settings_hora">Synchronization time:</string>
+    <string name="add_settings_cheboxLeyend">You want to receive notifications from the application.</string>
+    <string name="add_settings_rbtn_yes">YES</string>
     <string name="add_settings_rbtn_no">NO</string>
-    <string name="hint_time">Seleccione la hora</string>
+    <string name="hint_time">Select time</string>
 
-    <string name="btn_add">Agregar</string>
-    <string name="btn_cancel">Cancelar</string>
-    <string name="btn_close">Cerrar</string>
-    <string name="btn_save">Guardar</string>
+    <string name="btn_add">Add</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_close">Close</string>
+    <string name="btn_save">Save</string>
 
     <string name="txt_vehicle_name">Tsuru</string>
     <string name="txt_vehicle_brand">Nissan</string>
-    <string name="txt_vehicle_year">20/50/5055</string>
+    <string name="txt_vehicle_year">1982</string>
 
-    <string name="txt_about_developed">Desarrollado por:</string>
-
-    <string name="txt_record_cost">$33.50</string>
-    <string name="txt_dollar_char">$</string>
-
-    <string name="txt_messages_vehicle_created">¡Vehiculo creado!</string>
-    <string name="txt_messages_vehicle_updated">¡Vehiculo actualizado!</string>
-    <string name="txt_messages_vehicle_deleted">¡Vehiculo Eliminado!</string>
-
-    <string name="txt_messages_maintenance_created">¡Matenimiento agendado!</string>
-    <string name="txt_messages_maintenance_updated">¡Matenimiento actualizado!</string>
-    <string name="txt_messages_maintenance_deleted">¡Matenimiento Eliminado!</string>
-    <string name="txt_messages_maintenance_transferred">¡Matenimiento guardado en historial!</string>
-
-    <string name="txt_messages_record_created">¡Registro creado!</string>
-    <string name="txt_messages_record_updated">¡Registro actualizado!</string>
-    <string name="txt_messages_record_deleted">¡Registro Eliminado!</string>
-
-    <string name="validated_fields">¡Este campo no puede ir vacio!</string>
-
-
-
-
+    <string name="txt_about_developed">Developed by:</string>
     <string-array name="vehicles_array">
         <item>Nissan</item>
         <item>Kia</item>
@@ -97,13 +72,46 @@
         <item>Seat</item>
     </string-array>
 
-    <string name="txt_dialog_delete">Ten en cuenta que si eliminas un vehiculo tambien eliminaras los dato que dependan de el</string>
-    <string name = "txt_dialog_warning">Advertencia</string>
+    <string name="txt_messages_vehicle_created">Vehicle created!</string>
+    <string name="txt_messages_vehicle_updated">Updated vehicle!</string>
+    <string name="txt_messages_vehicle_deleted">Vehicle Eliminated!</string>
 
-    <string name = "txt_card_maintenance_detail">Hola mundo  otra cosa Hola mundo  otra cosa Hola mundo  otra cosa Hola mundo  otra cosa</string>
+    <string name="txt_messages_maintenance_created">Scheduled maintenance!</string>
+    <string name="txt_messages_maintenance_updated">Updated maintenance!</string>
+    <string name="txt_messages_maintenance_deleted">Maintenance Eliminated!</string>
+    <string name="txt_messages_maintenance_transferred">Maintenance saved in record!</string>
+
+    <string name="txt_messages_record_created">Record created!</string>
+    <string name="txt_messages_record_updated">Record updated!</string>
+    <string name="txt_messages_record_deleted">Record Deleted!</string>
+
+    <string name="validated_fields">This field can not be blank!</string>
+
+    <string name = "txt_dialog_delete"> Keep in mind that if you delete a vehicle you will also delete the data that depends on it </string>
+    <string name = "txt_dialog_warning">Warning</string>
+
+    <string name = "txt_dialog_completed_maintenance">Maintenance Performed</string>
+    <string name = "title_dialog_completed_maintenance">Maintenance Detail</string>
+
+    <string name = "txt_card_maintenance_detail">Text Test</string>
+
+    <string name = "txt_notifications_summary_content">Two new notifications</string>
+    <string name = "txt_notifications_summary_content_title">Completed maintenance</string>
+    <string name = "txt_notifications_action_hold_over">Hold over</string>
+    <string name = "txt_notifications_action_completed">Completed</string>
+    <string name = "txt_notifications_title">New maintenance</string>
+    <string name = "txt_notifications_cost_text">Enter the cost</string>
+
+    <string name="txt_record_cost">$33.50</string>
+    <string name="txt_dollar_char">$</string>
+
+    <string name="txt_info_no_vehicles">No vehicles yet!</string>
+
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="preference_file_key">com.islam.talleringo.PREFERENCE_FILE_KEY</string>
+
     <string name="facebook_app_id">286245596344245</string>
     <string name="fb_login_protocol_scheme">fb286245596344245</string>
+    <string name="db_name">vehicle</string>
 </resources>

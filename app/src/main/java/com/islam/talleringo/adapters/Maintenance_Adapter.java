@@ -4,12 +4,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.bumptech.glide.Glide;
 import com.islam.talleringo.R;
 import com.islam.talleringo.database.AppDatabase;
 import com.islam.talleringo.database.Maintenances.Maintenance;
@@ -47,6 +49,7 @@ public class Maintenance_Adapter  extends RecyclerView.Adapter<Maintenance_Adapt
                 db.vehicleDAO().getVehicle(maintenances.get(position).Vehicle_Id).toString(),
                 maintenances.get(position).Schedule_Date,
                 maintenances.get(position).Detail,
+                maintenances.get(position).notify,
                 itemClickListener,
                 menuItemClickListener
         );
@@ -62,18 +65,25 @@ public class Maintenance_Adapter  extends RecyclerView.Adapter<Maintenance_Adapt
         private final TextView txtDate;
         private final TextView txtDetail;
         private final ImageButton btnMenu;
+        private final ImageView notificationImg;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.txtModel = itemView.findViewById(R.id.txt_about_name);
             this.txtDate = itemView.findViewById(R.id.txt_maintenance_date);
             this.txtDetail = itemView.findViewById(R.id.txt_maintenance_detail);
             this.btnMenu = itemView.findViewById(R.id.btn_maintenance_menu);
+            this.notificationImg = itemView.findViewById(R.id.imageViewNotification);
         }
 
-        public void bind(int id, String model, String date, String detail, OnItemClickListener itemClickListener, OnMenuItemClickListener menuItemClickListener){
+        public void bind(int id, String model, String date, String detail, Boolean notification, OnItemClickListener itemClickListener, OnMenuItemClickListener menuItemClickListener){
             this.txtModel.setText(model);
             this.txtDate.setText(date);
             this.txtDetail.setText(detail);
+
+            Glide.with(App.getContext()).load(
+                    notification ? R.drawable.ic_notification_bell : R.drawable.ic_no_notification_bell)
+                    .into(notificationImg);
+
 
             itemView.setOnClickListener(v -> itemClickListener.OnItemClick(id, getAdapterPosition()));
 
